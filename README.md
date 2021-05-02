@@ -1,2 +1,3 @@
-# postado
-postado social media app
+# Postado
+
+postado social media app built with django + postgres
