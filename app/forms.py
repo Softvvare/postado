@@ -50,9 +50,3 @@ class RegisterForm(UserCreationForm):
             is_clean = True
 
         return is_clean
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("Email already exists")
-        return self.cleaned_data
