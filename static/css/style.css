@@ -1,7 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.titles {
+  font-family: "Montserrat", sans-serif;
+}
+
+.texts {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px;
+  top: 10px;
+  width: 99%;
+  margin: 20px auto;
+  background-color: rgba(195, 195, 195, 0.6);
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+}
+
+.navbar .nav-items {
+  margin: 10px;
+  padding: 10px;
+}
+
+.form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px;
+  width: 50%;
+  margin: 10px auto;
+  background-color: #c3c3c3;
+  border-radius: 15px;
+}
+
+.form-container form {
+  padding: 20px;
+}
+
+.form-container * {
+  border: 2px solid transparent;
+  font-size: 18px;
+  overflow: hidden;
+}
+
+.form-container p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  margin: 2em 0;
+}
+
+.form-container label {
+  font-family: "Montserrat", sans-serif;
+}
+
+.form-container input {
+  padding: 8px 5px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+}
+
+.form-container input[type="file"] {
+  cursor: pointer;
+}
+
+.form-container input[type="file"]::-webkit-file-upload-button {
+  cursor: pointer;
+  font-family: Montserrat;
+  border: none;
+  font-size: 14px;
+  margin: 0 10px;
+  padding: 5px;
+  color: #f2f2f2;
+  background-color: #2f80ed;
+  border-radius: 5px;
+}
+
+.form-container input[type="file"]:hover {
+  outline: none !important;
+  border: 2px solid #2f80ed;
+}
+
+.form-container input:focus {
+  outline: none !important;
+  border: 2px solid #2f80ed;
+}
+
+.form-container button {
+  padding: 5px 10px;
+  color: #f2f2f2;
+  background-color: #2f80ed;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  -webkit-box-shadow: 0px 0px 10px rgba(47, 129, 237, 0.7);
+          box-shadow: 0px 0px 10px rgba(47, 129, 237, 0.7);
 }
 /*# sourceMappingURL=style.css.map */

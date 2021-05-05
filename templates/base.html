@@ -8,6 +8,13 @@
     <title>Postado</title>
   </head>
   <body>
+    <nav class="navbar">
+      <div class="logo"></div>
+      <div class="nav-log-inout">
+        <a href="{% url 'login' %}" class="nav-items nav-login">Login</a>
+        <a href="" class="nav-items nav-register">Register</a>
+      </div>
+    </nav>
     <div class="container">{% block content %} {% endblock content %}</div>
     <script src="{% static 'js/index.js' %}"></script>
   </body>
