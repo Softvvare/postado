@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from app.forms import RegisterForm
+
 
 def feed(request):
     return render(request, 'feed.html')
