@@ -29,7 +29,7 @@ def login_request(request):
     form = AuthenticationForm()
 
     return render(request=request,
-                  template_name="templates/login.html",
+                  template_name="login.html",
                   context={"form": form})
 
 
@@ -53,5 +53,5 @@ def register(request):
         form = RegisterForm()
 
     return render(request=request,
-                  template_name="templates/register.html",
+                  template_name="register.html",
                   context={"form": form})

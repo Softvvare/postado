@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm,  SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.models import User, Group, Permission
 from django import forms
 from app.validators import validate_email
@@ -52,7 +52,7 @@ class RegisterForm(UserCreationForm):
         return is_clean
 
     def clean_email(self):
-       email = self.cleaned_data.get('email')
-       if User.objects.filter(email=email).exists():
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Email already exists")
-       return self.cleaned_data
+        return self.cleaned_data
