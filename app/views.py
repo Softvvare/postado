@@ -35,3 +35,21 @@ def logout_request(request):
     logout(request)
     messages.info(request, f"Logged out.")
     return redirect(login_request)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.info(request, f"You are now logged in as {username}")
+            redirect(feed)
+
+    else:
+        form = RegisterForm()
+
+    return render(request=request,
+                  template_name="templates/register.html",
+                  context={"form": form})
