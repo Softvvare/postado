@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from app.forms import RegisterForm
+
 
 def feed(request):
     return render(request, 'feed.html')
@@ -27,7 +29,7 @@ def login_request(request):
     form = AuthenticationForm()
 
     return render(request=request,
-                  template_name="templates/login.html",
+                  template_name="login.html",
                   context={"form": form})
 
 
@@ -35,3 +37,21 @@ def logout_request(request):
     logout(request)
     messages.info(request, f"Logged out.")
     return redirect(login_request)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.info(request, f"You are now logged in as {username}")
+            redirect(feed)
+
+    else:
+        form = RegisterForm()
+
+    return render(request=request,
+                  template_name="register.html",
+                  context={"form": form})

@@ -4,6 +4,8 @@
   <form method="POST">
     {% csrf_token %} {{form.as_p}}
     <button type="submit">Login</button>
+      <button onclick="location.href='/app/register'" type="button">Register</button>
   </form>
+ <a href="{% url 'password_reset' %}">Forgot Your Password?</a>
 </div>
 {% endblock %}

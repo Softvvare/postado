@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.feed, name='feed'),
+    path('register/', views.register),
 ]
