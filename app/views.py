@@ -5,11 +5,25 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from app.forms import RegisterForm
+from app.forms import RegisterForm, CreatePostForm
+from app.models import Post
+from django.contrib.auth.decorators import login_required
 
 
+def landing(request):
+    return render(request=request, template_name='landing.html')
+
+
+@login_required
 def feed(request):
-    return render(request, 'feed.html')
+    # arkadaşları ekleyince request.user yerine arkadaşlarını al
+    user = request.user
+    posts = Post.objects.filter(user=user)
+    context = {
+        'user': user,
+        'posts': posts
+    }
+    return render(request=request, template_name='feed.html', context=context)
 
 
 def login_request(request):
@@ -55,3 +69,29 @@ def register(request):
     return render(request=request,
                   template_name="register.html",
                   context={"form": form})
+
+
+@login_required
+def create(request):
+    user = request.user
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = user
+            data.save()
+            messages.success(request, f'Posted Successfully')
+            return redirect("feed")
+        else:
+            messages.error(request, f'Something went wrong!')
+            return redirect("create")
+    else:
+        form = CreatePostForm()
+    return render(request=request, template_name="create.html", context={'form': form})
+
+
+@login_required
+def delete(request, id):
+    post = Post.objects.filter(id=id)
+    post.delete()
+    return redirect('feed')

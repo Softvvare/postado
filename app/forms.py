@@ -1,19 +1,23 @@
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.models import User, Group, Permission
 from django import forms
+from django.db.models import fields
 from app.validators import validate_email
 from django.utils import timezone
 import datetime as dt
+from app.models import Post
 
 
 class RegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
-    email = forms.EmailField(max_length=255, required=True, validators=[validate_email])
+    email = forms.EmailField(
+        max_length=255, required=True, validators=[validate_email])
 
     class Meta(UserCreationForm):
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'password1', 'password2')
 
     def clean_first_name(self):
         cleaned_data = super(UserCreationForm, self).clean()
@@ -50,3 +54,9 @@ class RegisterForm(UserCreationForm):
             is_clean = True
 
         return is_clean
+
+
+class CreatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'photo']

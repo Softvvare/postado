@@ -1,0 +1,187 @@
+.feed {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .post {
+    margin: 2em 0;
+    background-color: $light-bg-color;
+    border-radius: 3em 3em 2em 2em;
+    padding: 0 0 1em 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 0.5em;
+    box-shadow: 0 5px 2em rgba($dark, 0.8);
+
+    img {
+      width: 100%;
+      border-radius: 2em 2em 0 0;
+    }
+
+    .post-delete {
+      position: absolute;
+      right: 1em;
+      top: 1em;
+      border-radius: 1em;
+      outline: none;
+      padding: 1em;
+      border: none;
+      background: rgba($light-bg-color, 0.4);
+      backdrop-filter: blur(15px);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        color: $light;
+        background: $danger-color;
+        box-shadow: 0 0 1em rgba($color: $danger-color, $alpha: 0.5);
+      }
+    }
+
+    .post-ctx {
+      grid-column: 2/6;
+      grid-row: 2/4;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: flex-start;
+
+      * {
+        margin: 0.2em 0;
+      }
+    }
+
+    .interactions {
+      grid-row: 4;
+      grid-column: 3/6;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-evenly;
+      align-items: center;
+
+      * {
+        border: 2px solid transparent;
+      }
+
+      .interact-container {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        place-self: end;
+        cursor: pointer;
+
+        img {
+          width: 50px;
+        }
+
+        &:hover {
+          border-bottom: 2px solid $blue-color;
+        }
+      }
+
+      .post-like {
+      }
+
+      .post-comment {
+      }
+
+      .post-share {
+      }
+    }
+
+    .post-image {
+      grid-column: 1/6;
+      max-height: 550px;
+      height: 100%;
+      object-fit: cover;
+
+      &:hover {
+        cursor: zoom-in;
+      }
+    }
+
+    .zoomed-image {
+      position: fixed;
+      max-height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      padding: 5px;
+      border-radius: 0;
+      cursor: zoom-out !important;
+      object-fit: contain;
+      z-index: 99;
+    }
+
+    .post-person-image {
+      grid-row: 2/4;
+    }
+
+    .post-username {
+    }
+
+    .post-title {
+    }
+
+    .post-content {
+    }
+
+    .post-date {
+      margin: 1em;
+      align-self: end;
+      grid-row: 4;
+    }
+  }
+
+  .delete-ensure {
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    background-color: rgba($light-bg-color, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 0 0 2em 2em;
+
+    * {
+      margin: 0.8em 0;
+    }
+
+    button {
+      color: $light;
+      font-size: 1.2em;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        padding: 0.5em 1.5em;
+      }
+    }
+
+    .ensure-yes {
+      background-color: $success-color;
+
+      &:hover {
+        box-shadow: 0px 0px 1em rgba($success-color, 0.7);
+      }
+    }
+
+    .ensure-cancel {
+      background-color: $danger-color;
+
+      &:hover {
+        box-shadow: 0px 0px 1em rgba($danger-color, 0.7);
+      }
+    }
+  }
+}
