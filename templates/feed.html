@@ -1,3 +1,61 @@
-{% extends "base.html" %} {% block content %}
-<a href="{% url 'logout' %}">Logout!</a>
+{% extends "base.html" %} {% load static %}{% block content %}
+<div id="dimmer"></div>
+<div class="container">
+  <div class="feed">
+    {% for post in posts %}
+    <div class="post">
+      <button class="post-delete" onclick="deleteEnsure(this)">Delete</button>
+      <div class="post-image-container">
+        {% if post.photo %}
+        <img class="post-image" src="{{ post.photo.url }}" alt="image" />
+        {% else %}
+        <p class="texts">Loading...</p>
+        {% endif %}
+      </div>
+      <img
+        class="post-person-image"
+        src="{% static 'images/icons/person.png' %}"
+        alt="user_pp"
+      />
+      <div class="post-ctx">
+        <h1 class="texts post-username">{{ post.user.username }}</h1>
+        <h2 class="texts post-title">{{ post.title }}</h2>
+        <p class="texts post-content">{{ post.content }}</p>
+      </div>
+      <p class="texts post-date">{{ post.updated_date }}</p>
+      <div class="interactions">
+        <p class="texts post-like interact-container">
+          <img src="{% static 'images/icons/like.png' %}" alt="like-icon" /><b
+            class="like-count"
+            >64</b
+          >
+        </p>
+        <p class="texts post-comment interact-container">
+          <img
+            src="{% static 'images/icons/comment.png' %}"
+            alt="comment-icon"
+          /><b class="comment-count">64</b>
+        </p>
+        <p class="texts post-share interact-container">
+          <img src="{% static 'images/icons/share.png' %}" alt="share-icon" />
+        </p>
+      </div>
+      <div class="delete-ensure">
+        <h1 class="titles">Are you sure you want to delete this post?</h1>
+        <button
+          class="ensure-yes texts"
+          onclick="window.location.href"
+          ="{% url 'delete' post.id %}"
+        >
+          Yes
+        </button>
+        <button class="ensure-cancel texts" onclick="closeEnsure(this)">
+          Cancel
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock content %}

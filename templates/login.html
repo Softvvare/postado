@@ -1,11 +1,20 @@
 {% extends 'base.html' %} {% block content %}
-
-<div class="form-container">
-  <form method="POST">
-    {% csrf_token %} {{form.as_p}}
-    <button type="submit">Login</button>
-      <button onclick="location.href='/app/register'" type="button">Register</button>
-  </form>
- <a href="{% url 'password_reset' %}">Forgot Your Password?</a>
+<div class="container">
+  <div class="form-container">
+    <h1 class="titles">Login</h1>
+    <form method="POST">
+      {% csrf_token %} {{form}}
+      <div class="form-btn-container">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+    <p class="texts lite-emphasis">
+      Not registered yet!
+      <a href="{% url 'register' %}"><b>Register Now!</b></a>
+    </p>
+    <p class="texts lite-emphasis">
+      <a href="{% url 'password_reset' %}"><b>Forgot Your Password?</b></a>
+    </p>
+  </div>
 </div>
 {% endblock %}
