@@ -25,10 +25,11 @@
       <p class="texts post-date">{{ post.updated_date }}</p>
       <div class="interactions">
         <p class="texts post-like interact-container">
-          <img src="{% static 'images/icons/like.png' %}" alt="like-icon" /><b
-            class="like-count"
-            >64</b
-          >
+          <a href="{% url 'like' post.id %}">
+            <img
+              src="{% static 'images/icons/like.png' %}"
+              alt="like-icon" /></a
+          ><a href=""><b class="like-count">{{ post.likes_count }}</b></a>
         </p>
         <p class="texts post-comment interact-container">
           <img

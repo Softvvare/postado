@@ -6,4 +6,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('create/', views.create, name='create'),
     path('delete/<uuid:id>/', views.delete, name='delete'),
+    path('like/<uuid:id>/', views.like, name='like'),
 ]
