@@ -23,6 +23,7 @@ class Post(BaseModel):  # post models
     created_date = models.DateTimeField(
         auto_now_add=True, verbose_name='Date of posted')
     updated_date = models.DateTimeField(auto_now=True)
+    likes_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"Post: {self.title} posted by {self.user} at {self.created_date}"

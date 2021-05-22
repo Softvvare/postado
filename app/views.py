@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from app.forms import RegisterForm, CreatePostForm
-from app.models import Post
+from app.models import Post, Like
 from django.contrib.auth.decorators import login_required
 
 
@@ -94,4 +94,19 @@ def create(request):
 def delete(request, id):
     post = Post.objects.filter(id=id)
     post.delete()
+    return redirect('feed')
+
+
+@login_required
+def like(request, id):
+    user = request.user
+    post = Post.objects.get(id=id)
+    like = Like.objects.filter(post=post, user=user)
+    if like.exists():
+        like.delete()
+        post.likes_count -= 1
+    else:
+        like.create(user=user, post=post)
+        post.likes_count += 1
+    post.save()
     return redirect('feed')
