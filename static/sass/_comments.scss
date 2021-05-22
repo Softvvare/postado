@@ -1,0 +1,99 @@
+.comment-section {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 2em;
+  background-color: $light-bg-color;
+  padding: 2em 0;
+  margin-bottom: 10em;
+
+  .comment-section-back {
+    text-decoration: none;
+    margin: 0.2em 0;
+    padding: 1em 1em;
+    font-size: 1em;
+    color: $blue-color;
+
+    &:hover {
+      text-shadow: 0 0 1em rgba($blue-color, 0.5);
+    }
+
+    &::before {
+      content: "◀ ";
+    }
+  }
+
+  .comment {
+    width: 100%;
+    margin: 0.2em 0;
+    padding: 1em 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+
+    .comment-ctx {
+      width: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-content: center;
+    }
+
+    img {
+      width: 50px;
+      grid-row: 1/2;
+      margin-right: 1em;
+    }
+
+    small {
+      align-self: flex-end;
+    }
+  }
+}
+
+.comment-form-container {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  .form-container {
+    margin: auto;
+    width: 60%;
+    padding: 0;
+
+    form {
+      width: 100%;
+      margin: 0;
+      padding: 0 3em;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      align-items: center;
+
+      label {
+        display: none;
+      }
+
+      textarea {
+        height: 100px;
+        border-radius: 1em;
+        grid-column: 1/6;
+        font-size: 1.5em;
+      }
+
+      .form-btn-container {
+        padding: 1em;
+
+        button {
+          &:hover {
+            padding: 0.5em 1em !important;
+            box-shadow: 0 0 1em rgba($success-color, 0.5);
+          }
+        }
+      }
+    }
+  }
+}

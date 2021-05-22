@@ -7,4 +7,5 @@ urlpatterns = [
     path('create/', views.create, name='create'),
     path('delete/<uuid:id>/', views.delete, name='delete'),
     path('like/<uuid:id>/', views.like, name='like'),
+    path('<uuid:id>/comments', views.comments, name='comments'),
 ]

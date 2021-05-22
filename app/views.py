@@ -1,12 +1,12 @@
-from django.shortcuts import render
-
+from django.http.response import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse
 
-from app.forms import RegisterForm, CreatePostForm
-from app.models import Post, Like
+from app.forms import RegisterForm, CreatePostForm, CreateCommentForm
+from app.models import Comment, Post, Like
 from django.contrib.auth.decorators import login_required
 
 
@@ -92,7 +92,11 @@ def create(request):
 
 @login_required
 def delete(request, id):
-    post = Post.objects.filter(id=id)
+    post = Post.objects.get(id=id)
+    like = Like.objects.filter(post=post)
+    comment = Comment.objects.filter(post=post)
+    like.delete()
+    comment.delete()
     post.delete()
     return redirect('feed')
 
@@ -110,3 +114,32 @@ def like(request, id):
         post.likes_count += 1
     post.save()
     return redirect('feed')
+
+
+@login_required
+def comments(request, id):
+    user = request.user
+    post = Post.objects.get(id=id)
+    comments = Comment.objects.filter(post=post, user=user)
+    if request.method == 'POST':
+        form = CreateCommentForm(request.POST)
+        if form.is_valid():
+            post.comments_count += 1
+            post.save()
+            data = form.save(commit=False)
+            data.user = user
+            data.post = post
+            data.save()
+            messages.success(request, f'Posted comment Successfully')
+            return redirect(reverse("comments", kwargs={'id': id}))
+        else:
+            messages.error(request, f'Something went wrong!')
+            return redirect(reverse("comments", kwargs={'id': id}))
+    form = CreateCommentForm()
+    context = {
+        'users': user,
+        'posts': post,
+        'comments': comments,
+        'form': form
+    }
+    return render(request=request, template_name='comments.html', context=context)

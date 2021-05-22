@@ -5,7 +5,7 @@ from django.db.models import fields
 from app.validators import validate_email
 from django.utils import timezone
 import datetime as dt
-from app.models import Post
+from app.models import Comment, Post
 
 
 class RegisterForm(UserCreationForm):
@@ -60,3 +60,9 @@ class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'photo']
+
+
+class CreateCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

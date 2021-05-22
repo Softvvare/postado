@@ -24,6 +24,7 @@ class Post(BaseModel):  # post models
         auto_now_add=True, verbose_name='Date of posted')
     updated_date = models.DateTimeField(auto_now=True)
     likes_count = models.PositiveIntegerField(default=0)
+    comments_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"Post: {self.title} posted by {self.user} at {self.created_date}"
@@ -34,7 +35,7 @@ class Post(BaseModel):  # post models
 
 class Like(BaseModel):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="post_likes")
+        User, on_delete=models.CASCADE, related_name="user_likes")
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="post_likes")
     created_date = models.DateTimeField(
@@ -50,7 +51,7 @@ class Like(BaseModel):
 
 class Comment(BaseModel):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="post_comments")
+        User, on_delete=models.CASCADE, related_name="user_comments")
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="post_comments")
     content = models.TextField(max_length=2000)
