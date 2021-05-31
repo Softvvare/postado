@@ -1,10 +1,16 @@
 {% extends "base.html" %} {% load static %}{% block content %}
 <div id="dimmer"></div>
 <div class="container">
-    <div class="tag-field-container">
-        <input type="submit" name="selected_tag" value="search">
+
+    <div class="form-container">
+        <form class="" role="form" method="post" id>
+            {% csrf_token %}
+            <input type="text">
+            <input type="submit" name="selected_tag" value="search">
+        </form>
 
     </div>
+
   <div class="feed">
     {% for post in posts %}
     <div class="post">
