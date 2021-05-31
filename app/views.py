@@ -33,7 +33,7 @@ def explore(request):
     user = request.user
 
     if request.method == "POST":
-        queried_tags = request.GET.get('selected_tag')
+        queried_tags = request.POST.get('selected_tag')
         print(queried_tags)
         tag_list = queried_tags.split(',')
         posts = Post.objects.filter(tags__name__in=tag_list)
