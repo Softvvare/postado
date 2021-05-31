@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 import uuid
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit, Transpose
+from taggit.managers import TaggableManager
+
 
 
 class BaseModel(models.Model):
@@ -26,6 +28,7 @@ class Post(BaseModel):  # post models
     updated_date = models.DateTimeField(auto_now=True)
     likes_count = models.PositiveIntegerField(default=0)
     comments_count = models.PositiveIntegerField(default=0)
+    tags = TaggableManager()
 
     def __str__(self):
         return f"Post: {self.title} posted by {self.user} at {self.created_date}"
