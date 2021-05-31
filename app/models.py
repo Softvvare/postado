@@ -28,7 +28,7 @@ class Post(BaseModel):  # post models
     updated_date = models.DateTimeField(auto_now=True)
     likes_count = models.PositiveIntegerField(default=0)
     comments_count = models.PositiveIntegerField(default=0)
-    tags = TaggableManager(through=BaseModel)
+    tags = TaggableManager(through=BaseModel.id)
 
     def __str__(self):
         return f"Post: {self.title} posted by {self.user} at {self.created_date}"
