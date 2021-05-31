@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -5,8 +6,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
 
-from app.forms import RegisterForm, CreatePostForm, CreateCommentForm
-from app.models import Comment, Post, Like
+from app.forms import RegisterForm, CreatePostForm, CreateCommentForm, UpdateUserForm, UpdateProfileForm
+from app.models import Comment, Post, Like, Profile, UserFollowing
 from django.contrib.auth.decorators import login_required
 
 
@@ -16,9 +17,11 @@ def landing(request):
 
 @login_required
 def feed(request):
-    # arkadaşları ekleyince request.user yerine arkadaşlarını al
     user = request.user
-    posts = Post.objects.filter(user=user)
+    follow_posts = Post.objects.filter(
+        user__followers__user_id=user)
+    self_posts = Post.objects.filter(user=user)
+    posts = (follow_posts | self_posts).distinct()
     context = {
         'user': user,
         'posts': posts
@@ -120,7 +123,7 @@ def like(request, id):
 def comments(request, id):
     user = request.user
     post = Post.objects.get(id=id)
-    comments = Comment.objects.filter(post=post, user=user)
+    comments = Comment.objects.filter(post=post)
     if request.method == 'POST':
         form = CreateCommentForm(request.POST)
         if form.is_valid():
@@ -143,3 +146,71 @@ def comments(request, id):
         'form': form
     }
     return render(request=request, template_name='comments.html', context=context)
+
+
+@login_required
+def profile(request, user_name):
+    user = User.objects.get(username=user_name)
+    profile = Profile.objects.get(user=user)
+    posts = Post.objects.filter(user=user)
+    session_user = request.user
+
+    is_following = False
+    session_following = UserFollowing.objects.filter(
+        user_id=session_user, following_user_id=user)
+    if session_following.exists():
+        is_following = True
+    else:
+        is_following = False
+
+    context = {
+        "session_user": session_user,
+        "profile": profile,
+        "followings": user.following.all(),
+        "followers": user.followers.all(),
+        "posts": posts,
+        "is_following": is_following
+    }
+
+    return render(request=request, template_name="profile.html", context=context)
+
+
+@login_required
+def follow(request, user_name):
+    user = User.objects.get(username=user_name)
+    session_user = request.user
+    session_following = UserFollowing.objects.filter(
+        user_id=session_user, following_user_id=user)
+
+    if session_following.exists():
+        session_following.delete()  # unfollow
+    else:
+        session_following.create(user_id=session_user,
+                                 following_user_id=user)  # follow
+    return redirect(reverse("profile", kwargs={'user_name': user_name}))
+
+
+@login_required
+def update_profile(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    if request.method == 'POST':
+        p_form = UpdateProfileForm(
+            request.POST, request.FILES, instance=profile)
+        u_form = UpdateUserForm(request.POST, instance=user)
+        if p_form.is_valid() and u_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Updated Successfully')
+            return redirect("update_profile")
+        else:
+            messages.error(request, f'Something went wrong!')
+            return redirect("update_profile")
+    else:
+        p_form = UpdateProfileForm(instance=user)
+        u_form = UpdateUserForm(instance=user)
+    context = {
+        'p_form': p_form,
+        'u_form': u_form
+    }
+    return render(request=request, template_name="update_profile.html", context=context)

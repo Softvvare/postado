@@ -5,13 +5,18 @@
     <a href="{% url 'feed' %}" class="comment-section-back texts">Back</a>
     {% for comment in comments %}
     <div class="comment">
-      <!-- user photo here -->
-      <img src="{% static 'images/icons/person.png' %}" alt="avatar" />
-      <div class="comment-ctx">
-        <h2 class="titles">{{ comment.user.username }}</h2>
-        <p class="texts">{{ comment.content }}</p>
-        <small class="texts"> {{ comment.created_date }} </small>
-      </div>
+      {% if not comment.user.user_profile.all %}
+      <img
+        class="post-person-image"
+        src="{% static 'images/icons/person.png' %}"
+        alt="user_pp"
+      />
+      {% endif %} {% for i in comment.user.user_profile.all %}
+      <img class="post-person-image" src="{{ i.avatar.url }}" alt="user_pp" />
+      {% endfor %}
+      <h2 class="titles">{{ comment.user.username }}</h2>
+      <p class="texts">{{ comment.content }}</p>
+      <small class="texts"> {{ comment.created_date }} </small>
     </div>
     {% endfor %}
   </div>

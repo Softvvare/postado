@@ -30,26 +30,30 @@
     width: 100%;
     margin: 0.2em 0;
     padding: 1em 1em;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.2em;
 
-    .comment-ctx {
-      width: 100%;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: flex-start;
-      align-content: center;
+    h2 {
+      grid-column: 2 / end;
     }
 
-    img {
-      width: 50px;
-      grid-row: 1/2;
-      margin-right: 1em;
+    p {
+      grid-column: 2 / end;
+      grid-row: 2;
     }
 
     small {
-      align-self: flex-end;
+      grid-row: 3;
+      grid-column: 1 / end;
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 100%;
+      grid-row: 1/3;
     }
   }
 }
