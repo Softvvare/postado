@@ -1,8 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
-
-    <div id="dimmer"></div>
+{% extends "base.html" %} {% load static %}{% block content %}
+<div id="dimmer"></div>
 <div class="container">
-  <div class="explore">
+    <div class="tag-field-container">
+        <input type="submit" name="selected_tag" value="search">
+
+    </div>
+  <div class="feed">
     {% for post in posts %}
     <div class="post">
       {% if post.user == user %}
@@ -46,6 +49,10 @@
         <p class="texts post-share interact-container">
           <img src="{% static 'images/icons/share.png' %}" alt="share-icon" />
         </p>
+          {% for tag in post.tags.all %}
+          <p>{{tag}}</p>
+          {% endfor %}
+
       </div>
       <div class="delete-ensure">
         <h1 class="titles">Are you sure you want to delete this post?</h1>

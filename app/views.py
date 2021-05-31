@@ -28,9 +28,26 @@ def feed(request):
     }
     return render(request=request, template_name='feed.html', context=context)
 
+
 def explore(request):
     user = request.user
 
+    if request.method == "GET":
+        queried_tags = request.GET.get('selected_tag')
+        tag_list = queried_tags.split(',')
+        posts = Post.objects.filter(tags__name__in=tag_list)
+        context = {
+            'user': user,
+            'posts': posts
+        }
+        return render(request=request, template_name='explore.html', context=context)
+    else:
+        posts = Post.objects.all()
+        context = {
+            'user': user,
+            'posts': posts
+        }
+        return render(request=request, template_name='explore.html', context=context)
 
 
 def login_request(request):
