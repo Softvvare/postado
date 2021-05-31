@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% load static %}{% block content %}
+
+<div class="container">
+  <div class="comment-section">
+    <a href="{% url 'feed' %}" class="comment-section-back texts">Back</a>
+    {% for comment in comments %}
+    <div class="comment">
+      {% if not comment.user.user_profile.all %}
+      <img
+        class="post-person-image"
+        src="{% static 'images/icons/person.png' %}"
+        alt="user_pp"
+      />
+      {% endif %} {% for i in comment.user.user_profile.all %}
+      <img class="post-person-image" src="{{ i.avatar.url }}" alt="user_pp" />
+      {% endfor %}
+      <h2 class="titles">{{ comment.user.username }}</h2>
+      <p class="texts">{{ comment.content }}</p>
+      <small class="texts"> {{ comment.created_date }} </small>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="comment-form-container">
+    <div class="form-container">
+      <form method="POST">
+        {% csrf_token %} {{ form }}
+        <div class="form-btn-container">
+          <button type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

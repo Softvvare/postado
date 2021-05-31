@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 import uuid
 from imagekit.models import ProcessedImageField
-from imagekit.processors import ResizeToFit
+from imagekit.processors import ResizeToFit, Transpose
 
 
 class BaseModel(models.Model):
@@ -15,15 +16,16 @@ class BaseModel(models.Model):
 
 class Post(BaseModel):  # post models
     user = models.ForeignKey(User, verbose_name="Posted by",
-                             on_delete=models.CASCADE, related_name="photo_posts")
+                             on_delete=models.CASCADE, related_name="user_posts")
     photo = ProcessedImageField(upload_to="photos", format="JPEG", options={
-                                "quality": 100}, processors=[ResizeToFit(width=1200, height=1200)])
+                                "quality": 100}, processors=[Transpose(), ResizeToFit(width=1200, height=1200)])
     title = models.CharField(max_length=100, verbose_name='Post Title')
     content = models.TextField()
     created_date = models.DateTimeField(
         auto_now_add=True, verbose_name='Date of posted')
     updated_date = models.DateTimeField(auto_now=True)
     likes_count = models.PositiveIntegerField(default=0)
+    comments_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"Post: {self.title} posted by {self.user} at {self.created_date}"
@@ -34,7 +36,7 @@ class Post(BaseModel):  # post models
 
 class Like(BaseModel):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="post_likes")
+        User, on_delete=models.CASCADE, related_name="user_likes")
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="post_likes")
     created_date = models.DateTimeField(
@@ -50,7 +52,7 @@ class Like(BaseModel):
 
 class Comment(BaseModel):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="post_comments")
+        User, on_delete=models.CASCADE, related_name="user_comments")
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="post_comments")
     content = models.TextField(max_length=2000)
@@ -62,3 +64,34 @@ class Comment(BaseModel):
 
     class Meta:
         ordering = ["-created_date"]
+
+
+class Profile(BaseModel):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="user_profile")
+    avatar = ProcessedImageField(upload_to="avatars", format="JPEG", options={
+                                 "quality": 100}, processors=[Transpose(), ResizeToFit(width=500, height=500)], default="defaults/person.png")
+    bio = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} 's Profile"
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+post_save.connect(create_user_profile, sender=User)
+
+
+class UserFollowing(BaseModel):
+    user_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="following")
+    following_user_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="followers")
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user_id} follows {self.following_user_id}"

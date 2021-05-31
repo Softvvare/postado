@@ -2,10 +2,11 @@ from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.models import User, Group, Permission
 from django import forms
 from django.db.models import fields
+from imagekit.models.fields import ProcessedImageField
 from app.validators import validate_email
 from django.utils import timezone
 import datetime as dt
-from app.models import Post
+from app.models import Comment, Post, Profile
 
 
 class RegisterForm(UserCreationForm):
@@ -60,3 +61,21 @@ class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'photo']
+
+
+class CreateCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['avatar', 'bio']

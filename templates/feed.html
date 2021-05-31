@@ -4,7 +4,9 @@
   <div class="feed">
     {% for post in posts %}
     <div class="post">
+      {% if post.user == user %}
       <button class="post-delete" onclick="deleteEnsure(this)">Delete</button>
+      {% endif %}
       <div class="post-image-container">
         {% if post.photo %}
         <img class="post-image" src="{{ post.photo.url }}" alt="image" />
@@ -12,11 +14,13 @@
         <p class="texts">Loading...</p>
         {% endif %}
       </div>
+      {% for i in post.user.user_profile.all %}
       <img
         class="post-person-image"
-        src="{% static 'images/icons/person.png' %}"
+        src="{{ i.avatar.url }}"
         alt="user_pp"
       />
+      {% endfor %}
       <div class="post-ctx">
         <h1 class="texts post-username">{{ post.user.username }}</h1>
         <h2 class="texts post-title">{{ post.title }}</h2>
@@ -32,10 +36,11 @@
           ><a href=""><b class="like-count">{{ post.likes_count }}</b></a>
         </p>
         <p class="texts post-comment interact-container">
-          <img
-            src="{% static 'images/icons/comment.png' %}"
-            alt="comment-icon"
-          /><b class="comment-count">64</b>
+          <a href="{% url 'comments' post.id %}">
+            <img
+              src="{% static 'images/icons/comment.png' %}"
+              alt="comment-icon" /></a
+          ><b class="comment-count">{{ post.comments_count }}</b>
         </p>
         <p class="texts post-share interact-container">
           <img src="{% static 'images/icons/share.png' %}" alt="share-icon" />
@@ -45,8 +50,7 @@
         <h1 class="titles">Are you sure you want to delete this post?</h1>
         <button
           class="ensure-yes texts"
-          onclick="window.location.href"
-          ="{% url 'delete' post.id %}"
+          onclick=window.location.href=`{% url 'delete' post.id %}`
         >
           Yes
         </button>

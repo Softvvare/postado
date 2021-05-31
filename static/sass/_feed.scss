@@ -74,6 +74,7 @@
     .post-image-container {
       grid-column: 1/6;
       width: 100%;
+      max-height: 550px;
       overflow: hidden;
       border-radius: 2em 2em 0 0;
 
@@ -107,6 +108,13 @@
 
     .post-person-image {
       grid-row: 2/4;
+      place-self: center;
+      height: 150px;
+      width: 150px;
+      border-radius: 100%;
+      background-position: top;
+      object-fit: cover;
+      margin: 0.5em;
     }
 
     .post-username {
@@ -163,6 +171,7 @@
     align-items: center;
     position: absolute;
     top: 0;
+    z-index: 2;
     background-color: rgba($light-bg-color, 0.7);
     backdrop-filter: blur(15px);
     border-radius: 2em 2em 0 0;

@@ -1,0 +1,105 @@
+.profile {
+  margin-top: 8em;
+  position: sticky;
+  top: calc(6em + 70px);
+  background: $grey;
+  width: 100%;
+  padding-bottom: 3em;
+  box-shadow: 0 0 1em rgba($deep-dark, 0.4);
+
+  .p-properties {
+    width: 70%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-content: center;
+    align-items: center;
+    gap: 1em;
+
+    .avatar {
+      width: 200px;
+      height: 200px;
+      margin-top: -4em;
+      border-radius: 100%;
+      border: 5px solid $grey;
+      object-fit: cover;
+    }
+
+    .username {
+      grid-row: 2;
+    }
+
+    .bio {
+      text-align: justify;
+      grid-column: 1/7;
+      grid-row: 3;
+    }
+
+    .p-i-text {
+      margin: 1em;
+      padding: 1em;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .p-btn {
+      font-size: 1em;
+      padding: 0.5em 0.8em;
+      cursor: pointer;
+      outline: none;
+      border: 2px solid transparent;
+      border-radius: 1em;
+      background-color: $success-color;
+      color: $light;
+
+      &:hover {
+        box-shadow: 0 0 1em $success-color;
+      }
+    }
+
+    #follow {
+      background-color: $blue-color;
+
+      &:hover {
+        box-shadow: 0 0 1em $blue-color;
+      }
+    }
+
+    #unfollow {
+      background-color: $danger-color;
+
+      &:hover {
+        box-shadow: 0 0 1em $danger-color;
+      }
+    }
+
+    .p-ff {
+      border-radius: 1em;
+      cursor: pointer;
+      &:hover {
+        background-color: $light-accent-color;
+        box-shadow: 0 0 1em rgba($deep-dark, 0.1);
+      }
+    }
+  }
+}
+
+.profile-posts {
+  padding-top: 3em;
+  padding-bottom: 3em;
+  backdrop-filter: blur(20px);
+
+  .container {
+    margin-top: 0 !important;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 5;
+  background-color: $light-bg-color;
+  box-shadow: 0 0 1em rgba($deep-dark, 0.4);
+  border-radius: 1em;
+}

@@ -40,12 +40,20 @@
             alt=""
             id="nav-img"
         /></a>
-        <a href="#" class="nav-item titles" data-help="PROFILE"
-          ><img
-            src="{% static 'images/icons/person.png' %}"
+        <a
+          href="{% url 'profile' user.username %}"
+          class="nav-item titles"
+          data-help="PROFILE"
+        >
+          {% for i in user.user_profile.all %}
+          <img
+            src="{{ i.avatar.url }}"
             alt=""
             id="nav-img"
-        /></a>
+            class="nav-profile"
+          />
+          {% endfor %}</a
+        >
         <a href="{% url 'logout' %}" class="nav-item titles" data-help="LOGOUT"
           ><img
             src="{% static 'images/icons/logout.png' %}"
