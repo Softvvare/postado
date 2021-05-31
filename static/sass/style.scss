@@ -114,6 +114,7 @@ body {
   top: 0;
   z-index: 2;
   background-color: rgba($deep-dark, 0.7);
+  backdrop-filter: blur(20px);
 }
 
 .container {

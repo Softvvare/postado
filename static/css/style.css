@@ -333,6 +333,8 @@
   z-index: 99 !important;
   -webkit-transform: scale(1) !important;
           transform: scale(1) !important;
+  -webkit-transition: 0s !important;
+  transition: 0s !important;
 }
 
 .feed .post .post-person-image {
@@ -696,6 +698,8 @@
   padding-bottom: 3em;
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
+  -webkit-transition: 0s;
+  transition: 0s;
 }
 
 .profile-posts .container {
@@ -703,14 +707,72 @@
 }
 
 .popup {
+  visibility: visible;
+  opacity: 1;
   position: fixed;
-  top: 10%;
+  top: 50%;
   left: 50%;
   z-index: 5;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   background-color: #f7f6f5;
+  padding: 1em 1em;
+  border-radius: 2em;
   -webkit-box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
           box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
-  border-radius: 1em;
+}
+
+.popup .popup-close {
+  cursor: pointer;
+  padding: 0.4em 0em;
+  margin: 0.2em 0;
+  font-size: 1em;
+  color: #3b82f6;
+}
+
+.popup .popup-close:hover {
+  text-shadow: 0 0 0.5em rgba(59, 130, 246, 0.8);
+}
+
+.popup .popup-close::before {
+  content: "✖ ";
+}
+
+.popup .card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 1em 0;
+}
+
+.popup .card img {
+  margin: 0.5em;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: pointer;
+}
+
+.popup .card img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.popup-unactive {
+  visibility: hidden;
+  opacity: 0;
 }
 
 * {
@@ -843,6 +905,8 @@ body::-webkit-scrollbar-thumb:hover {
   top: 0;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
 }
 
 .container {

@@ -7,9 +7,9 @@
     <p class="titles bio">{{ profile.bio }}</p>
     <p class="titles p-i-text">Posts
       <b>{{ posts|length }}</b></p>
-    <p class="titles p-i-text p-ff">Followings 
+    <p class="titles p-i-text p-ff" id="open-followings">Followings 
       <b>{{ followings|length }}</b></p>
-    <p class="titles p-i-text p-ff">Followers 
+    <p class="titles p-i-text p-ff" id="open-followers">Followers 
       <b>{{ followers|length }}</b></p>
     {% if user != profile.user %}
     <button class="p-btn texts">Message</button>
@@ -24,23 +24,36 @@
   </div>
 </div>
 
-<!--<div class="popup">
+<div class="popup popup-unactive" id="following-popup">
+  <p class="popup-close texts">Close</p>
+  {% if followings|length == 0 %}
+  <p class="texts">There are no following person</p>
+  {% endif %}
   {% for u in followings %}
-  <div class="following">
+  <div class="card">
     <p class="texts">{{ u }}</p>
-    {% for i in u.user_id.user_profile.all %}
-    <img src="{{ i.avatar.url }}" alt="following_avatar">
+    {% for i in u.following_user_id.user_profile.all %}
+    <img src="{{ i.avatar.url }}" alt="f_avatar" id="following-user" data-purl="{% url 'profile' i.user.username %}">
     {% endfor %}
   </div>
   {% endfor %}
 </div>
--->
 
-    <!--
-     {% for u in followers %}
-    <p class="texts">{{ u }}</p>
+<div class="popup popup-unactive" id="follower-popup">
+  <p class="popup-close texts">Close</p>
+  {% if followings|length == 0 %}
+  <p class="texts">There are no follower person</p>
+  {% endif %}
+  {% for u in followers %}
+  <div class="card">
+    {% for i in u.user_id.user_profile.all %}
+    <img src="{{ i.avatar.url }}" alt="f_avatar">
     {% endfor %}
-    -->
+    <p class="texts">{{ u }}</p>
+  </div>
+  {% endfor %}
+</div>
+
 <div class="profile-posts">
   <div class="container">
     <div class="feed p-feed-container">
