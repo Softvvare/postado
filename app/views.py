@@ -34,6 +34,7 @@ def explore(request):
 
     if request.method == "POST":
         queried_tags = request.GET.get('selected_tag')
+        print(queried_tags)
         tag_list = queried_tags.split(',')
         posts = Post.objects.filter(tags__name__in=tag_list)
         context = {
@@ -43,7 +44,6 @@ def explore(request):
         return render(request=request, template_name='explore.html', context=context)
     else:
         posts = Post.objects.all()
-        print(posts)
         context = {
             'user': user,
             'posts': posts
