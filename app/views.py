@@ -43,7 +43,7 @@ def explore(request):
 
     else:
         queried_tags = request.POST.get('selected_tag')
-        if queried_tags is not None:
+        if queried_tags !="":
             tag_list = queried_tags.split(',')
             posts = Post.objects.filter(tags__name__in=tag_list)
             context = {
