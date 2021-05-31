@@ -28,6 +28,10 @@ def feed(request):
     }
     return render(request=request, template_name='feed.html', context=context)
 
+def explore(request):
+    user = request.user
+
+
 
 def login_request(request):
     if request.method == 'POST':
@@ -83,6 +87,7 @@ def create(request):
             data = form.save(commit=False)
             data.user = user
             data.save()
+            form.save_m2m()
             messages.success(request, f'Posted Successfully')
             return redirect("feed")
         else:
