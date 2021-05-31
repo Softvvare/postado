@@ -51,6 +51,7 @@ def explore(request):
                 'posts': posts
             }
             print("2")
+            print(queried_tags)
             return render(request=request, template_name='explore.html', context=context)
         else:
             posts = Post.objects.all()
@@ -59,6 +60,7 @@ def explore(request):
                 'posts': posts
             }
             print("3")
+            print(queried_tags)
             return render(request=request, template_name='explore.html', context=context)
 
 
