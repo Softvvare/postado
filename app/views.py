@@ -52,6 +52,7 @@ def explore(request):
             }
             print("2")
             print(queried_tags)
+            print(type(queried_tags))
             return render(request=request, template_name='explore.html', context=context)
         else:
             posts = Post.objects.all()
