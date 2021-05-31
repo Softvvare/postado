@@ -32,7 +32,7 @@ def feed(request):
 def explore(request):
     user = request.user
 
-    if request.method == "GET":
+    if request.method == "POST":
         queried_tags = request.GET.get('selected_tag')
         tag_list = queried_tags.split(',')
         posts = Post.objects.filter(tags__name__in=tag_list)
