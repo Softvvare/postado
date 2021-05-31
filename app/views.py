@@ -43,6 +43,7 @@ def explore(request):
         return render(request=request, template_name='explore.html', context=context)
     else:
         posts = Post.objects.all()
+        print(posts)
         context = {
             'user': user,
             'posts': posts
