@@ -38,7 +38,6 @@ def explore(request):
             'user': user,
             'posts': posts
         }
-        print("1")
         return render(request=request, template_name='explore.html', context=context)
 
     else:
@@ -50,9 +49,6 @@ def explore(request):
                 'user': user,
                 'posts': posts
             }
-            print("2")
-            print(queried_tags)
-            print(type(queried_tags))
             return render(request=request, template_name='explore.html', context=context)
         else:
             posts = Post.objects.all()
@@ -60,8 +56,6 @@ def explore(request):
                 'user': user,
                 'posts': posts
             }
-            print("3")
-            print(queried_tags)
             return render(request=request, template_name='explore.html', context=context)
 
 
