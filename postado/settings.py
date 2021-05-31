@@ -63,8 +63,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'postado.wsgi.application'
 
 
-Database
-https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
