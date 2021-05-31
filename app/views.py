@@ -34,14 +34,21 @@ def explore(request):
 
     if request.method == "POST":
         queried_tags = request.POST.get('selected_tag')
-        print(queried_tags)
-        tag_list = queried_tags.split(',')
-        posts = Post.objects.filter(tags__name__in=tag_list)
-        context = {
-            'user': user,
-            'posts': posts
-        }
-        return render(request=request, template_name='explore.html', context=context)
+        if queried_tags is not None:
+            tag_list = queried_tags.split(',')
+            posts = Post.objects.filter(tags__name__in=tag_list)
+            context = {
+                'user': user,
+                'posts': posts
+            }
+            return render(request=request, template_name='explore.html', context=context)
+        else:
+            posts = Post.objects.all()
+            context = {
+                'user': user,
+                'posts': posts
+            }
+            return render(request=request, template_name='explore.html', context=context)
     else:
         posts = Post.objects.all()
         context = {
