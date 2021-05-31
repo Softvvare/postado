@@ -32,7 +32,16 @@ def feed(request):
 def explore(request):
     user = request.user
 
-    if request.method == "POST":
+    if request.method != "POST":
+        posts = Post.objects.all()
+        context = {
+            'user': user,
+            'posts': posts
+        }
+        print("1")
+        return render(request=request, template_name='explore.html', context=context)
+
+    else:
         queried_tags = request.POST.get('selected_tag')
         if queried_tags is not None:
             tag_list = queried_tags.split(',')
@@ -41,22 +50,16 @@ def explore(request):
                 'user': user,
                 'posts': posts
             }
+            print("2")
             return render(request=request, template_name='explore.html', context=context)
         else:
             posts = Post.objects.all()
-            print("deneme")
             context = {
                 'user': user,
                 'posts': posts
             }
+            print("3")
             return render(request=request, template_name='explore.html', context=context)
-    else:
-        posts = Post.objects.all()
-        context = {
-            'user': user,
-            'posts': posts
-        }
-        return render(request=request, template_name='explore.html', context=context)
 
 
 def login_request(request):
