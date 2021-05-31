@@ -5,7 +5,8 @@ import uuid
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit, Transpose
 from taggit.managers import TaggableManager
-
+from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
+from django.utils.translation import ugettext_lazy as _
 
 
 class BaseModel(models.Model):
@@ -14,6 +15,13 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True  # abstract class
+
+
+class UUIDTaggedItem(GenericUUIDTaggedItemBase, TaggedItemBase):
+
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
 
 
 class Post(BaseModel):  # post models
@@ -28,7 +36,7 @@ class Post(BaseModel):  # post models
     updated_date = models.DateTimeField(auto_now=True)
     likes_count = models.PositiveIntegerField(default=0)
     comments_count = models.PositiveIntegerField(default=0)
-    tags = TaggableManager(through=uuid.uuid4)
+    tags = TaggableManager(through=UUIDTaggedItem)
 
     def __str__(self):
         return f"Post: {self.title} posted by {self.user} at {self.created_date}"
