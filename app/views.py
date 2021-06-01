@@ -114,6 +114,7 @@ def create(request):
             data.user = user
 
             tags = form.cleaned_data['tags']
+            print(type(tags))
             stripped_tag_list = [i.strip(' ') for i in tags]
             data.tags = stripped_tag_list
             data.save()
