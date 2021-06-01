@@ -62,6 +62,13 @@ class CreatePostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'content', 'photo', 'tags']
 
+    def clean_tags(self):
+
+        tags = self.cleaned_data.get('tags', None)
+        if tags:
+            tags = [t.strip() for t in tags]
+        return tags
+
 
 class CreateCommentForm(forms.ModelForm):
     class Meta:

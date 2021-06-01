@@ -113,12 +113,12 @@ def create(request):
             data = form.save(commit=False)
             data.user = user
 
-            tags = form.cleaned_data['tags']
-            # tags = tags.replace(" ", "")
-            # data.tags = tags
-            stripped_tag_list = [i.strip(' ') for i in tags]
-            tag_str = ','.join(stripped_tag_list)
-            data.tags = tag_str
+            # tags = form.cleaned_data['tags']
+            # # tags = tags.replace(" ", "")
+            # # data.tags = tags
+            # stripped_tag_list = [i.strip(' ') for i in tags]
+            # tag_str = ','.join(stripped_tag_list)
+            # data.tags.add( tag_str)
 
             data.save()
             form.save_m2m()
