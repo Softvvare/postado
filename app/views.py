@@ -112,6 +112,11 @@ def create(request):
         if form.is_valid():
             data = form.save(commit=False)
             data.user = user
+
+            tags = form.cleaned_data['tags']
+            splitted_tag_list = tags.split(',')
+            stripped_tag_list = [i.strip(' ') for i in splitted_tag_list]
+            data.post.tags = stripped_tag_list
             data.save()
             form.save_m2m()
             messages.success(request, f'Posted Successfully')
