@@ -42,9 +42,10 @@ def explore(request):
 
     else:
         queried_tags = request.POST.get('selected_tag')
-        if queried_tags !="":
+        if queried_tags != "":
             tag_list = queried_tags.split(',')
-            posts = Post.objects.filter(tags__name__in=tag_list)
+            stripped_tag_list = [i.strip() for i in tag_list]
+            posts = Post.objects.filter(tags__name__in=stripped_tag_list)
             context = {
                 'user': user,
                 'posts': posts
@@ -112,14 +113,6 @@ def create(request):
         if form.is_valid():
             data = form.save(commit=False)
             data.user = user
-
-            # tags = form.cleaned_data['tags']
-            # # tags = tags.replace(" ", "")
-            # # data.tags = tags
-            # stripped_tag_list = [i.strip(' ') for i in tags]
-            # tag_str = ','.join(stripped_tag_list)
-            # data.tags.add( tag_str)
-
             data.save()
             form.save_m2m()
             messages.success(request, f'Posted Successfully')
