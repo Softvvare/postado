@@ -115,7 +115,7 @@ def create(request):
 
             tags = form.cleaned_data['tags']
             stripped_tag_list = [i.strip(' ') for i in tags]
-            data.post.tags = stripped_tag_list
+            data.tags = stripped_tag_list
             data.save()
             form.save_m2m()
             messages.success(request, f'Posted Successfully')
