@@ -114,7 +114,8 @@ def create(request):
             data.user = user
 
             tags = form.cleaned_data['tags']
-            splitted_tag_list = tags.split(',')
+            splitted_tag_list = [i.split(',') for i in tags]
+
             stripped_tag_list = [i.strip(' ') for i in splitted_tag_list]
             data.post.tags = stripped_tag_list
             data.save()
