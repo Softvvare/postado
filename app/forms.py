@@ -60,7 +60,7 @@ class RegisterForm(UserCreationForm):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'photo', 'tag']
+        fields = ['title', 'content', 'photo', 'tags']
 
 
 class CreateCommentForm(forms.ModelForm):
