@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="popup popup-unactive" id="following-popup">
+<div class="popup-f popup-unactive" id="following-popup">
   <p class="popup-close texts">Close</p>
   {% if followings|length == 0 %}
   <p class="texts">There are no following person</p>
@@ -33,13 +33,13 @@
   <div class="card">
     <p class="texts">{{ u }}</p>
     {% for i in u.following_user_id.user_profile.all %}
-    <img src="{{ i.avatar.url }}" alt="f_avatar" id="following-user" data-purl="{% url 'profile' i.user.username %}">
+    <img src="{{ i.avatar.url }}" alt="f_avatar" id="ff-user" data-purl="{% url 'profile' i.user.username %}">
     {% endfor %}
   </div>
   {% endfor %}
 </div>
 
-<div class="popup popup-unactive" id="follower-popup">
+<div class="popup-f popup-unactive" id="follower-popup">
   <p class="popup-close texts">Close</p>
   {% if followings|length == 0 %}
   <p class="texts">There are no follower person</p>
@@ -47,7 +47,7 @@
   {% for u in followers %}
   <div class="card">
     {% for i in u.user_id.user_profile.all %}
-    <img src="{{ i.avatar.url }}" alt="f_avatar">
+    <img src="{{ i.avatar.url }}" alt="f_avatar" id="ff-user" data-purl="{% url 'profile' i.user.username %}">
     {% endfor %}
     <p class="texts">{{ u }}</p>
   </div>

@@ -339,8 +339,7 @@
 
 .feed .post .post-person-image {
   -ms-grid-row: 2;
-  -ms-grid-row-span: 2;
-  grid-row: 2/4;
+  grid-row: 2;
   place-self: center;
   height: 150px;
   width: 150px;
@@ -706,7 +705,7 @@
   margin-top: 0 !important;
 }
 
-.popup {
+.popup-f {
   visibility: visible;
   opacity: 1;
   position: fixed;
@@ -722,7 +721,7 @@
           box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
 }
 
-.popup .popup-close {
+.popup-f .popup-close {
   cursor: pointer;
   padding: 0.4em 0em;
   margin: 0.2em 0;
@@ -730,15 +729,15 @@
   color: #3b82f6;
 }
 
-.popup .popup-close:hover {
+.popup-f .popup-close:hover {
   text-shadow: 0 0 0.5em rgba(59, 130, 246, 0.8);
 }
 
-.popup .popup-close::before {
+.popup-f .popup-close::before {
   content: "✖ ";
 }
 
-.popup .card {
+.popup-f .card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -755,7 +754,7 @@
   margin: 1em 0;
 }
 
-.popup .card img {
+.popup-f .card img {
   margin: 0.5em;
   width: 50px;
   height: 50px;
@@ -765,7 +764,7 @@
   cursor: pointer;
 }
 
-.popup .card img:hover {
+.popup-f .card img:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
@@ -789,7 +788,11 @@
 }
 
 body {
-  background-color: #594061;
+  background: url("../images/bg.png");
+  background-attachment: fixed;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-position: center center;
 }
 
 body::-webkit-scrollbar {
@@ -926,6 +929,7 @@ body::-webkit-scrollbar-thumb:hover {
   color: #000;
   -webkit-backdrop-filter: blur(15px);
           backdrop-filter: blur(15px);
+  z-index: 1;
 }
 
 .dj-message .dj-message-text {

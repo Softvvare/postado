@@ -14,7 +14,11 @@
 }
 
 body {
-  background-color: $dark-bg-color;
+  // background-color: $dark-bg-color;
+  background: url("../images/bg.png");
+  background-attachment: fixed;
+  object-fit: contain;
+  background-position: center center;
 
   &::-webkit-scrollbar {
     width: 12px;
@@ -133,6 +137,7 @@ body {
   background-color: rgba($light-bg-color, 0.4);
   color: $deep-dark;
   backdrop-filter: blur(15px);
+  z-index: 1;
 
   .dj-message-text {
     font-size: 1.5em;

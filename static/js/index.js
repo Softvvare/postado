@@ -78,7 +78,7 @@ setTimeout(() => {
 
 try {
   // going to following profile:
-  var fprofiles = document.querySelectorAll("#following-user");
+  var fprofiles = document.querySelectorAll("#ff-user");
   fprofiles.forEach((elem) => {
     elem.addEventListener("click", (e) => {
       window.location.href = elem.dataset.purl;
@@ -89,7 +89,7 @@ try {
   var popupCloseBtn = document.querySelectorAll(".popup-close");
   popupCloseBtn.forEach((elem) => {
     elem.addEventListener("click", (e) => {
-      document.querySelectorAll(".popup").forEach((element) => {
+      document.querySelectorAll(".popup-f").forEach((element) => {
         element.classList.add("popup-unactive");
       });
     });
