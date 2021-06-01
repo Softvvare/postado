@@ -63,7 +63,10 @@ class CreatePostForm(forms.ModelForm):
         fields = ['title', 'content', 'photo', 'tags']
 
     def clean_tags(self):
-
+        """
+        strip all the tags
+        coming from create form
+        """
         tags = self.cleaned_data.get('tags', None)
         if tags:
             tags = [t.strip() for t in tags]
