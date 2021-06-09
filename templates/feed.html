@@ -19,6 +19,7 @@
         class="post-person-image"
         src="{{ i.avatar.url }}"
         alt="user_pp"
+        data-url="{% url 'profile' user.username %}"
       />
       {% endfor %}
       <div class="post-ctx">

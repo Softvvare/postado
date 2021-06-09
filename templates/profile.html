@@ -5,21 +5,21 @@
     <img class="avatar" src="{{ profile.avatar.url }}" alt="avatar" />
     <h1 class="titles username">{{ profile.user.username }}</h1>
     <p class="titles bio">{{ profile.bio }}</p>
-    <p class="titles p-i-text">Posts
+    <p class="titles p-i-text" id="p-posts">Posts
       <b>{{ posts|length }}</b></p>
     <p class="titles p-i-text p-ff" id="open-followings">Followings 
       <b>{{ followings|length }}</b></p>
     <p class="titles p-i-text p-ff" id="open-followers">Followers 
       <b>{{ followers|length }}</b></p>
     {% if user != profile.user %}
-    <button class="p-btn texts">Message</button>
+    <button class="p-btn texts m-btn">Message</button>
     {% else %}
-    <button class="p-btn texts" onclick=window.location.href=`{% url 'update_profile' %}`>Edit</button>
+    <button class="p-btn texts" id="p-edit" onclick=window.location.href=`{% url 'update_profile' %}`>Edit</button>
     {% endif %}
     {% if user == profile.user %} {% elif not is_following %}
-    <button class="p-btn texts" id="follow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Follow</button>
+    <button class="p-btn texts f-btn" id="follow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Follow</button>
     {% else %}
-    <button class="p-btn texts" id="unfollow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Unfollow</button>
+    <button class="p-btn texts f-btn" id="unfollow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Unfollow</button>
     {% endif %}
   </div>
 </div>

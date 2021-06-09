@@ -116,6 +116,12 @@
       background-position: top;
       object-fit: cover;
       margin: 0.5em;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 1em rgba($dark, 0.3);
+      }
     }
 
     .post-username {
@@ -209,6 +215,17 @@
 
       &:hover {
         box-shadow: 0px 0px 1em rgba($danger-color, 0.7);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .feed {
+    .post {
+      .post-person-image {
+        width: 100px;
+        height: 100px;
       }
     }
   }

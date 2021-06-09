@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="comment-section">
-    <a href="{% url 'feed' %}" class="comment-section-back texts">Back</a>
+    <a href="{% url 'feed' %}" class="back-btn texts">Back</a>
     {% for comment in comments %}
     <div class="comment">
       {% if not comment.user.user_profile.all %}

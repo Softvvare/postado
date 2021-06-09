@@ -14,7 +14,7 @@
 }
 
 body {
-  // background-color: $dark-bg-color;
+  background-color: $dark-bg-color;
   background: url("../images/bg.png");
   background-attachment: fixed;
   object-fit: contain;
@@ -116,7 +116,7 @@ body {
   height: 100%;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 6;
   background-color: rgba($deep-dark, 0.7);
   backdrop-filter: blur(20px);
 }
@@ -124,7 +124,7 @@ body {
 .container {
   width: 60%;
   max-width: 1200px;
-  margin: 3em auto;
+  margin: 3em auto 5em auto;
   z-index: 1;
 }
 
@@ -152,6 +152,22 @@ body {
   backdrop-filter: blur(15px);
   padding: 0.4em;
   border-radius: 0 1em 1em 1em;
+}
+
+.back-btn {
+  text-decoration: none;
+  margin: 0.2em 0;
+  padding: 1em 1em;
+  font-size: 1em;
+  color: $blue-color;
+
+  &:hover {
+    text-shadow: 0 0 1em rgba($blue-color, 0.5);
+  }
+
+  &::before {
+    content: "◀ ";
+  }
 }
 
 .form-container {
@@ -300,6 +316,56 @@ body {
     &:focus {
       outline: none !important;
       border: 2px solid $light-accent-color;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    width: 95%;
+    margin-bottom: 8em;
+  }
+
+  .form-container {
+    width: 90%;
+  }
+
+  .navbar {
+    position: fixed;
+    top: inherit;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 89.99%;
+
+    .logo {
+      display: none;
+    }
+
+    .navbar-nav {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      width: 100%;
+
+      .nav-item {
+        img {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .navbar-nav {
+    .nav-item {
+      img {
+        width: 50px !important;
+        height: 50px !important;
+      }
     }
   }
 }

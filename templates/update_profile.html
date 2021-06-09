@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
   <div class="form-container">
+    <a href="{% url 'profile' user.username %}" class="back-btn texts">Back</a>
     <h1 class="titles">Edit Profile</h1>
     <form method="POST">
       {% csrf_token %} {{u_form}} {{p_form}}

@@ -67,6 +67,13 @@ document.querySelector("#logo").addEventListener("click", (e) => {
   location.href = document.querySelector("#logo").dataset.url;
 });
 
+// from feed to profile:
+document.querySelectorAll(".post-person-image").forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    location.href = elem.dataset.url;
+  });
+});
+
 // alert coold down:
 var alrt = document.querySelector(".dj-message");
 setTimeout(() => {
