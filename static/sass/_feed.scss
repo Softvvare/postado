@@ -15,6 +15,68 @@
     grid-gap: 0.5em;
     box-shadow: 0 5px 2em rgba($dark, 0.8);
 
+    .liked-popup-active {
+      opacity: 1 !important;
+      visibility: visible !important;
+      left: 50% !important;
+    }
+
+    .liked-popup {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      background: $light-bg-color;
+      max-width: 500px;
+      max-height: 500px;
+      left: -150%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 1em rgba($dark, 0.7);
+      padding: 0.5em;
+      border-radius: 2em;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $dark-bg-color;
+        border-radius: 2em;
+        margin: 2em;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-color;
+        border-radius: 2em;
+
+        &:hover {
+          background: $light-accent-color;
+        }
+      }
+
+      .back-btn {
+        cursor: pointer;
+
+        &::before {
+          content: "✖ ";
+        }
+      }
+
+      .liked-user {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        margin: 0.5em 0.5em 0.5em 0;
+      }
+
+      .post-person-image {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
     img {
       width: 100%;
     }
@@ -50,14 +112,23 @@
         align-items: center;
         justify-content: center;
         place-self: end;
-        cursor: pointer;
 
         img {
+          cursor: pointer;
           width: 50px;
+
+          &:hover {
+            border-bottom: 2px solid $blue-color;
+          }
         }
 
-        &:hover {
-          border-bottom: 2px solid $blue-color;
+        .like-count {
+          cursor: pointer;
+
+          &:hover {
+            color: $blue-color;
+            text-shadow: 0 0 1em $blue-color;
+          }
         }
       }
 

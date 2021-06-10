@@ -22,9 +22,12 @@ def feed(request):
         user__followers__user_id=user)
     self_posts = Post.objects.filter(user=user)
     posts = (follow_posts | self_posts).distinct()
+    liked_posts = [i for i in Post.objects.all(
+    ) if Like.objects.filter(user=user, post=i)]
     context = {
         'user': user,
-        'posts': posts
+        'posts': posts,
+        'liked_posts': liked_posts
     }
     return render(request=request, template_name='feed.html', context=context)
 

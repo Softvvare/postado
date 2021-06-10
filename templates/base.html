@@ -15,30 +15,41 @@
   <body>
     <nav class="navbar">
       <div class="logo" id="logo" data-url="{% url 'landing' %}">
-        <img src="{% static 'images/postado-logo.png' %}" alt="logo" />
+        <img
+          src="{% static 'images/postado-logo.png' %}"
+          alt="logo"
+          loading="lazy"
+        />
       </div>
       <div class="navbar-nav">
         {% if user.is_authenticated %}
         <a href="{% url 'feed' %}" class="nav-item titles" data-help="FEED"
-          ><img src="{% static 'images/icons/feed.png' %}" alt="" id="nav-img"
+          ><img
+            src="{% static 'images/icons/feed.png' %}"
+            alt=""
+            id="nav-img"
+            loading="lazy"
         /></a>
         <a href="{% url 'create' %}" class="nav-item titles" data-help="CREATE"
           ><img
             src="{% static 'images/icons/create.png' %}"
             alt=""
             id="nav-img"
+            loading="lazy"
         /></a>
         <a href="#" class="nav-item titles" data-help="EXPLORE"
           ><img
             src="{% static 'images/icons/explore.png' %}"
             alt=""
             id="nav-img"
+            loading="lazy"
         /></a>
         <a href="#" class="nav-item titles" data-help="MESSAGES"
           ><img
             src="{% static 'images/icons/message.png' %}"
             alt=""
             id="nav-img"
+            loading="lazy"
         /></a>
         <a
           href="{% url 'profile' user.username %}"
@@ -51,6 +62,7 @@
             alt=""
             id="nav-img"
             class="nav-profile"
+            loading="lazy"
           />
           {% endfor %}</a
         >
@@ -59,6 +71,7 @@
             src="{% static 'images/icons/logout.png' %}"
             alt=""
             id="nav-img"
+            loading="lazy"
         /></a>
         {% else %}
         <a href="{% url 'login' %}" class="nav-item titles">Login</a>

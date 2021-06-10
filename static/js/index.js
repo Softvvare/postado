@@ -1,3 +1,34 @@
+// onload scroll continue where you left off:
+document.querySelectorAll(".interactions a").forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    localStorage.setItem("windowLocation", document.location);
+    localStorage.setItem("windowScrollPosition", window.scrollY);
+  });
+});
+
+// scroll to last position:
+window.onload = () => {
+  window.scrollTo({
+    left: 0,
+    top: localStorage.getItem("windowScrollPosition"),
+    behavior: "smooth",
+  });
+};
+
+// set scroll position to 0 if navbar is used:
+document.querySelectorAll(".nav-item").forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    localStorage.setItem("windowScrollPosition", 0);
+  });
+});
+
+// back to the page where you left off:
+try {
+  document.getElementById("back-left-off").addEventListener("click", (e) => {
+    window.location.href = localStorage.getItem("windowLocation");
+  });
+} catch (err) {}
+
 // delete ensure functions:
 function deleteEnsure(e) {
   e.parentElement.children[6].style.opacity = 1;
@@ -33,7 +64,9 @@ navIcons.forEach((elem) => {
   elem.parentElement.addEventListener(
     "mouseout",
     (e) => {
-      document.getElementById("popup").remove();
+      try {
+        document.getElementById("popup").remove();
+      } catch (err) {}
     },
     false
   );
@@ -70,7 +103,21 @@ document.querySelector("#logo").addEventListener("click", (e) => {
 // from feed to profile:
 document.querySelectorAll(".post-person-image").forEach((elem) => {
   elem.addEventListener("click", (e) => {
-    location.href = elem.dataset.url;
+    window.location.href = elem.dataset.url;
+  });
+});
+
+// open liked users popup:
+document.querySelectorAll(".like-count").forEach((elem) => {
+  var popUpWindow =
+    elem.parentElement.parentElement.parentElement.lastElementChild;
+  elem.addEventListener("click", (e) => {
+    popUpWindow.classList.toggle("liked-popup-active");
+  });
+  popUpWindow.children[0].addEventListener("click", (e) => {
+    if (popUpWindow.classList.contains("liked-popup-active")) {
+      popUpWindow.classList.remove("liked-popup-active");
+    }
   });
 });
 

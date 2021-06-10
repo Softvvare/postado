@@ -2,7 +2,7 @@
 <div id="dimmer"></div>
 <div class="profile">
   <div class="p-properties">
-    <img class="avatar" src="{{ profile.avatar.url }}" alt="avatar" />
+    <img class="avatar" src="{{ profile.avatar.url }}" alt="avatar" loading="lazy"/>
     <h1 class="titles username">{{ profile.user.username }}</h1>
     <p class="titles bio">{{ profile.bio }}</p>
     <p class="titles p-i-text" id="p-posts">Posts
@@ -86,7 +86,7 @@
               <img
                 src="{% static 'images/icons/like.png' %}"
                 alt="like-icon" /></a
-            ><a href=""><b class="like-count">{{ post.likes_count }}</b></a>
+            ><b class="like-count">{{ post.likes_count }}</b>
           </p>
           <p class="texts post-comment interact-container">
             <a href="{% url 'comments' post.id %}">
@@ -111,6 +111,34 @@
           <button class="ensure-cancel texts" onclick="closeEnsure(this)">
             Cancel
           </button>
+        </div>
+        <div class="liked-popup">
+          <p class="back-btn texts">Close</p>
+          {% if post.likes_count == 0 %}
+          <p class="texts" style="padding-bottom: 1em;">No one has liked this post yet.</p>
+          {% endif %}
+          {% for u in post.post_likes.all %}
+          <div class="liked-user">
+            {% if not u.user.user_profile.all %}
+            <img
+              class="post-person-image"
+              src="{% static 'images/icons/person.png' %}"
+              alt="user_pp"
+              loading="lazy"
+              data-url="{% url 'profile' u.user.username %}"
+            />
+            {% endif %} {% for p in u.user.user_profile.all %}
+            <img
+              class="post-person-image"
+              src="{{ p.avatar.url }}"
+              alt="user_pp"
+              loading="lazy"
+              data-url="{% url 'profile' u.user.username %}"
+            />
+            {% endfor %}
+            <p class="texts"><b>{{ u.user.username }}</b> liked!</p>
+          </div>
+          {% endfor %}
         </div>
       </div>
       {% endfor %}
