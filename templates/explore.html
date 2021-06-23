@@ -20,7 +20,12 @@
         {% endif %}
       </div>
       {% for i in post.user.user_profile.all %}
-      <img class="post-person-image" src="{{ i.avatar.url }}" alt="user_pp" />
+      <img
+        class="post-person-image"
+        src="{{ i.avatar.url }}"
+        data-url="{% url 'profile' i.user.username %}"
+        alt="user_pp"
+      />
       {% endfor %}
       <div class="post-ctx" data-url="{% url 'detailed_post' post.id %}">
         <h1 class="texts post-username">{{ post.user.username }}</h1>
@@ -40,7 +45,8 @@
           <b
             style="
               margin: 0.2em;
-              background: #3b82f6;
+              color: #f2f2f2;
+              background: #f2b076;
               border-radius: 10px;
               padding: 4px;
             "
