@@ -26,7 +26,7 @@ def navigator(request):
             dup = UserFollowing.objects.get(following_user_id = form.cleaned_data["receiver"].following_user_id)
             print("\n\n",type(dup),"\n\n")
 
-            if ChatRoom.objects.filter(receiver__in=dup).exists():
+            if ChatRoom.objects.get(receiver__in=dup).exists():
                 messages.error(request, f'You can not open second chat room!')
                 return redirect(navigator)
 
