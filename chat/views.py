@@ -23,7 +23,8 @@ def navigator(request):
             data.name = "From-{}-to-{}".format(
                 user.username, form.cleaned_data["receiver"].following_user_id.username)
             try:
-                ChatRoom.objects.filter(receiver__in=name)
+                x=ChatRoom.objects.filter(receiver__in=name)
+                print("\n\n",x,"\n\n")
             except:
                 messages.error(request, f'You can not open second chat room!')
                 return redirect(navigator)
