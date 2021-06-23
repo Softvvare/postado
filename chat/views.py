@@ -18,17 +18,15 @@ def navigator(request):
         if form.is_valid():
             data = form.save(commit=False)
             data.auth = user
-            name = form.cleaned_data["receiver"].following_user_id
-
             data.name = "From-{}-to-{}".format(
                 user.username, form.cleaned_data["receiver"].following_user_id.username)
 
-            dup = UserFollowing.objects.get(following_user_id = form.cleaned_data["receiver"].following_user_id)
+            dup = UserFollowing.objects.get(following_user_id=form.cleaned_data["receiver"].following_user_id)
 
             if dup == user:
                 return redirect(navigator)
 
-            if ChatRoom.objects.filter(auth=user, receiver=dup).exists():
+            if ChatRoom.objects.filter(auth=user, receiver=dup) == user:
                 messages.error(request, f'You can not open second chat room!')
                 return redirect(navigator)
 
