@@ -27,8 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'imagekit',  # Third party app
     'chat.apps.ChatConfig',
+    # Third party apps
+    'imagekit',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -67,14 +69,12 @@ WSGI_APPLICATION = 'postado.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'postado_database',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'gWH22k!Yt$VC',
-        # 'HOST': '159.89.54.81',
-        # 'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postado_database',
+        'USER': 'postgres',
+        'PASSWORD': 'gWH22k!Yt$VC',
+        'HOST': '159.89.54.81',
+        'PORT': '5432',
     }
 }
 

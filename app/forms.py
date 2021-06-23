@@ -60,7 +60,17 @@ class RegisterForm(UserCreationForm):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'photo']
+        fields = ['title', 'content', 'photo', 'tags']
+
+    def clean_tags(self):
+        """
+        strip all the tags
+        coming from create form
+        """
+        tags = self.cleaned_data.get('tags', None)
+        if tags:
+            tags = [t.strip() for t in tags]
+        return tags
 
 
 class CreateCommentForm(forms.ModelForm):

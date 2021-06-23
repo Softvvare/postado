@@ -32,6 +32,37 @@ def feed(request):
     return render(request=request, template_name='feed.html', context=context)
 
 
+def explore(request):
+    user = request.user
+
+    if request.method != "POST":
+        posts = Post.objects.all()
+        context = {
+            'user': user,
+            'posts': posts
+        }
+        return render(request=request, template_name='explore.html', context=context)
+
+    else:
+        queried_tags = request.POST.get('selected_tag')
+        if queried_tags != "":
+            tag_list = queried_tags.split(',')
+            stripped_tag_list = [i.strip() for i in tag_list]
+            posts = Post.objects.filter(tags__name__in=stripped_tag_list)
+            context = {
+                'user': user,
+                'posts': posts
+            }
+            return render(request=request, template_name='explore.html', context=context)
+        else:
+            posts = Post.objects.all()
+            context = {
+                'user': user,
+                'posts': posts
+            }
+            return render(request=request, template_name='explore.html', context=context)
+
+
 def login_request(request):
     if request.method == 'POST':
         username = request.POST.get("username")
@@ -86,6 +117,7 @@ def create(request):
             data = form.save(commit=False)
             data.user = user
             data.save()
+            form.save_m2m()
             messages.success(request, f'Posted Successfully')
             return redirect("feed")
         else:
