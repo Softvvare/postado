@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.landing, name='landing'),
     path('app/', include('app.urls')),
+    path('chat/', include('chat.urls')),
     path('login/', views.login_request, name='login'),
     path('logout/', views.logout_request, name='logout'),
 

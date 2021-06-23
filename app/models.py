@@ -105,4 +105,4 @@ class UserFollowing(BaseModel):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user_id} follows {self.following_user_id}"
+        return f"{self.following_user_id}"

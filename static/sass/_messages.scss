@@ -1,0 +1,87 @@
+.navigator-form {
+  width: 50%;
+  max-width: 550px;
+  margin: auto;
+  background: $light;
+  padding: 1em;
+  border-radius: 2em;
+
+  form {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    select {
+      padding: 5px;
+      border-radius: 10px 0 0 10px;
+      background-color: $grey;
+      font-size: 1em;
+      user-select: text;
+      margin-left: 10px;
+      border: 2px solid transparent;
+      cursor: pointer;
+
+      &:focus {
+        outline: none !important;
+        border: 2px solid $light-accent-color;
+      }
+    }
+
+    button {
+      padding: 5px;
+      border-radius: 0 10px 10px 0;
+      font-size: 1em;
+      border: 2px solid transparent;
+      cursor: pointer;
+      background-color: $success-color;
+      color: $light;
+
+      &:hover {
+        box-shadow: 0 0 10px $success-color;
+      }
+
+      &:focus {
+        outline: none !important;
+        border: 2px solid $light-accent-color;
+      }
+    }
+  }
+}
+
+.room-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 3em 0;
+  padding: 1em;
+  background-color: $light-bg-color;
+  border-radius: 2em;
+
+  .room {
+    width: 100%;
+    margin: 1em auto;
+    padding: 1em;
+    background-color: $grey;
+    border-radius: 1em;
+    cursor: pointer;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    img {
+      height: 50px;
+      width: 50px;
+      margin-right: 1em;
+      object-fit: cover;
+      border-radius: 100%;
+      height: 50px;
+    }
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+}

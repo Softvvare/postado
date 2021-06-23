@@ -4,6 +4,8 @@
 @import "./feed";
 @import "./comments";
 @import "./profile";
+@import "./messages";
+@import "./room";
 
 * {
   margin: 0;
@@ -15,21 +17,25 @@
 
 body {
   background-color: $dark-bg-color;
+  background: url("../images/bg.png");
+  background-attachment: fixed;
+  object-fit: contain;
+  background-position: center center;
 
   &::-webkit-scrollbar {
     width: 12px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #212132;
+    background: $dark-bg-color;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $light;
-    border-radius: 2px;
-    border: 3px solid transparent;
+    background-color: $primary-color;
+    border-radius: 0.2em;
+
     &:hover {
-      background: $primary-color;
+      background: $light-accent-color;
     }
   }
 }
@@ -85,13 +91,12 @@ body {
       font-weight: bold;
 
       &:hover {
-        text-shadow: 0 0 10px $primary-color;
+        text-shadow: 0 0 10px $deep-light;
       }
 
       img {
         width: 50px;
         height: 50px;
-        filter: invert(1);
       }
 
       .nav-profile {
@@ -112,14 +117,15 @@ body {
   height: 100%;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 6;
   background-color: rgba($deep-dark, 0.7);
+  backdrop-filter: blur(20px);
 }
 
 .container {
   width: 60%;
   max-width: 1200px;
-  margin: 3em auto;
+  margin: 3em auto 5em auto;
   z-index: 1;
 }
 
@@ -129,9 +135,11 @@ body {
   bottom: 1em;
   right: 1em;
   border-radius: 1em 1em 0 1em;
-  background-color: rgba($light-bg-color, 0.4);
-  color: $deep-dark;
+  background-color: rgba($dark, 0.5);
+  color: $deep-light;
   backdrop-filter: blur(15px);
+  z-index: 1;
+  box-shadow: 0 5px 10px rgba($deep-dark, 0.1);
 
   .dj-message-text {
     font-size: 1.5em;
@@ -146,6 +154,23 @@ body {
   backdrop-filter: blur(15px);
   padding: 0.4em;
   border-radius: 0 1em 1em 1em;
+}
+
+.back-btn {
+  text-decoration: none;
+  margin: 0.2em 0;
+  padding: 1em 1em;
+  font-size: 1em;
+  color: $blue-color;
+  cursor: pointer;
+
+  &:hover {
+    text-shadow: 0 0 10px $blue-color;
+  }
+
+  &::before {
+    content: "◀ ";
+  }
 }
 
 .form-container {
@@ -174,7 +199,7 @@ body {
       text-decoration: none;
 
       &:hover {
-        text-shadow: 0 0 0.5em rgba($blue-color, 0.5);
+        text-shadow: 0 0 10px rgba($blue-color, 0.5);
       }
     }
   }
@@ -223,6 +248,7 @@ body {
     border-radius: 5px;
     background-color: $grey;
     font-size: 1.5em;
+    user-select: text;
 
     &[type="file"] {
       cursor: pointer;
@@ -285,6 +311,7 @@ body {
     font-size: 1em;
     overflow: auto;
     resize: none;
+    user-select: text;
 
     &:hover {
       outline: none !important;
@@ -294,6 +321,62 @@ body {
     &:focus {
       outline: none !important;
       border: 2px solid $light-accent-color;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    width: 95%;
+    margin-bottom: 8em;
+  }
+
+  .form-container {
+    width: 90%;
+  }
+
+  .navbar {
+    position: fixed;
+    top: inherit;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 89.99%;
+
+    .logo {
+      display: none;
+    }
+
+    .navbar-nav {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      width: 100%;
+
+      .nav-item {
+        img {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .dj-message {
+    top: 1em;
+    bottom: inherit;
+    border-radius: 1em 0 1em 1em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .navbar-nav {
+    .nav-item {
+      img {
+        width: 50px !important;
+        height: 50px !important;
+      }
     }
   }
 }

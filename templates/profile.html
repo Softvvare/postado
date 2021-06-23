@@ -2,45 +2,58 @@
 <div id="dimmer"></div>
 <div class="profile">
   <div class="p-properties">
-    <img class="avatar" src="{{ profile.avatar.url }}" alt="avatar" />
+    <img class="avatar" src="{{ profile.avatar.url }}" alt="avatar" loading="lazy"/>
     <h1 class="titles username">{{ profile.user.username }}</h1>
     <p class="titles bio">{{ profile.bio }}</p>
-    <p class="titles p-i-text">Posts
+    <p class="titles p-i-text" id="p-posts">Posts
       <b>{{ posts|length }}</b></p>
-    <p class="titles p-i-text p-ff">Followings 
+    <p class="titles p-i-text p-ff" id="open-followings">Followings 
       <b>{{ followings|length }}</b></p>
-    <p class="titles p-i-text p-ff">Followers 
+    <p class="titles p-i-text p-ff" id="open-followers">Followers 
       <b>{{ followers|length }}</b></p>
     {% if user != profile.user %}
-    <button class="p-btn texts">Message</button>
+    <button class="p-btn texts m-btn">Message</button>
     {% else %}
-    <button class="p-btn texts" onclick=window.location.href=`{% url 'update_profile' %}`>Edit</button>
+    <button class="p-btn texts" id="p-edit" onclick=window.location.href=`{% url 'update_profile' %}`>Edit</button>
     {% endif %}
     {% if user == profile.user %} {% elif not is_following %}
-    <button class="p-btn texts" id="follow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Follow</button>
+    <button class="p-btn texts f-btn" id="follow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Follow</button>
     {% else %}
-    <button class="p-btn texts" id="unfollow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Unfollow</button>
+    <button class="p-btn texts f-btn" id="unfollow" onclick=window.location.href=`{% url 'follow' profile.user.username %}`>Unfollow</button>
     {% endif %}
   </div>
 </div>
 
-<!--<div class="popup">
+<div class="popup-f popup-unactive" id="following-popup">
+  <p class="popup-close texts">Close</p>
+  {% if followings|length == 0 %}
+  <p class="texts">There are no following person</p>
+  {% endif %}
   {% for u in followings %}
-  <div class="following">
+  <div class="card">
     <p class="texts">{{ u }}</p>
-    {% for i in u.user_id.user_profile.all %}
-    <img src="{{ i.avatar.url }}" alt="following_avatar">
+    {% for i in u.following_user_id.user_profile.all %}
+    <img src="{{ i.avatar.url }}" alt="f_avatar" id="ff-user" data-purl="{% url 'profile' i.user.username %}">
     {% endfor %}
   </div>
   {% endfor %}
 </div>
--->
 
-    <!--
-     {% for u in followers %}
-    <p class="texts">{{ u }}</p>
+<div class="popup-f popup-unactive" id="follower-popup">
+  <p class="popup-close texts">Close</p>
+  {% if followers|length == 0 %}
+  <p class="texts">There are no follower person</p>
+  {% endif %}
+  {% for u in followers %}
+  <div class="card">
+    {% for i in u.user_id.user_profile.all %}
+    <img src="{{ i.avatar.url }}" alt="f_avatar" id="ff-user" data-purl="{% url 'profile' i.user.username %}">
     {% endfor %}
-    -->
+    <p class="texts">{{ u.user_id.username }}</p>
+  </div>
+  {% endfor %}
+</div>
+
 <div class="profile-posts">
   <div class="container">
     <div class="feed p-feed-container">
@@ -61,7 +74,7 @@
           src="{{ profile.avatar.url }}"
           alt="user_pp"
         />
-        <div class="post-ctx">
+        <div class="post-ctx" data-url="{% url 'detailed_post' post.id %}">
           <h1 class="texts post-username">{{ post.user.username }}</h1>
           <h2 class="texts post-title">{{ post.title }}</h2>
           <p class="texts post-content">{{ post.content }}</p>
@@ -73,7 +86,7 @@
               <img
                 src="{% static 'images/icons/like.png' %}"
                 alt="like-icon" /></a
-            ><a href=""><b class="like-count">{{ post.likes_count }}</b></a>
+            ><b class="like-count">{{ post.likes_count }}</b>
           </p>
           <p class="texts post-comment interact-container">
             <a href="{% url 'comments' post.id %}">
@@ -82,7 +95,7 @@
                 alt="comment-icon" /></a
             ><b class="comment-count">{{ post.comments_count }}</b>
           </p>
-          <p class="texts post-share interact-container">
+          <p class="texts post-share interact-container" id="share" data-copy="{% url 'detailed_post' post.id %}">
             <img src="{% static 'images/icons/share.png' %}" alt="share-icon" />
           </p>
         </div>
@@ -98,6 +111,34 @@
           <button class="ensure-cancel texts" onclick="closeEnsure(this)">
             Cancel
           </button>
+        </div>
+        <div class="liked-popup">
+          <p class="back-btn texts">Close</p>
+          {% if post.likes_count == 0 %}
+          <p class="texts" style="padding-bottom: 1em;">No one has liked this post yet.</p>
+          {% endif %}
+          {% for u in post.post_likes.all %}
+          <div class="liked-user">
+            {% if not u.user.user_profile.all %}
+            <img
+              class="post-person-image"
+              src="{% static 'images/icons/person.png' %}"
+              alt="user_pp"
+              loading="lazy"
+              data-url="{% url 'profile' u.user.username %}"
+            />
+            {% endif %} {% for p in u.user.user_profile.all %}
+            <img
+              class="post-person-image"
+              src="{{ p.avatar.url }}"
+              alt="user_pp"
+              loading="lazy"
+              data-url="{% url 'profile' u.user.username %}"
+            />
+            {% endfor %}
+            <p class="texts"><b>{{ u.user.username }}</b> liked!</p>
+          </div>
+          {% endfor %}
         </div>
       </div>
       {% endfor %}

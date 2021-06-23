@@ -118,3 +118,7 @@ dmypy.json
 
 # VSCode
 .vscode/
+
+# Media files
+/media/avatars
+/media/photos

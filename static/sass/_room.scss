@@ -1,0 +1,116 @@
+.messages-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: $light-bg-color;
+  padding: 1em;
+  border-radius: 2em;
+  margin-bottom: 10em;
+
+  #self-message {
+    align-self: flex-end;
+
+    .message-ctx {
+      align-items: flex-end;
+    }
+  }
+
+  .message {
+    margin: 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    img {
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+
+    .message-ctx {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+  }
+}
+
+.message-input {
+  background-color: $light-bg-color;
+  width: 50%;
+  max-width: 550px;
+  margin: auto;
+  padding: 1em;
+  border-radius: 2em;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 4;
+  box-shadow: 0 0 10px rgba($color: $dark-bg-color, $alpha: 0.4);
+
+  form {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-self: center;
+    align-items: center;
+
+    label {
+      display: none;
+    }
+
+    textarea {
+      height: 100px;
+      border-radius: 1.5em 0 0 1.5em;
+      border: 2px solid transparent;
+      padding: 0.8em;
+      font-size: 1.5em;
+      margin-right: -3px;
+      resize: none;
+      user-select: text;
+
+      &:hover {
+        outline: none !important;
+        border: 2px solid $primary-color;
+      }
+
+      &:focus {
+        outline: none !important;
+        border: 2px solid $light-accent-color;
+      }
+    }
+
+    .form-btn-container {
+      width: 30%;
+      margin: 0;
+      padding: 0;
+
+      button {
+        background-color: $success-color;
+        color: $light;
+        border: 2px solid transparent;
+        cursor: pointer;
+        border-radius: 0 2em 2em 0;
+        width: 100%;
+        height: 100px;
+        margin: 0;
+        padding: 0;
+
+        &:hover {
+          box-shadow: 0 0 10px $success-color;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .message-input {
+    margin-bottom: 8em;
+  }
+}

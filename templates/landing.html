@@ -7,13 +7,29 @@
 />
 
 <div class="intro-section white-texts">
-  <div class="container">
+  <div class="container texts">
     <h1 class="titles">Postado</h1>
-    <p class="texts">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae
-      harum perferendis ad minima sed consequuntur! Mollitia neque beatae
-      consectetur harum qui, perferendis ab hic id sint sequi, officiis aperiam
-      nobis?
+    <p>
+      We present to you a brand new social media "Postado". Bored in quarantine?
+      Tired of switching between social media and blogs? Become a member of
+      "Postado" now for free and enjoy the fun. Socialize now with dozens of
+      users. You can use it like social media by sharing photos, or use it as a
+      blog by sharing your articles.</p>
+
+      <p>- Follow with profiles you like and read content or look at pictures
+      according to your own tastes.</p>
+
+      <p>- You can share your valuable comments under the content and like the
+      posts.
+      </p>
+
+      <p>- If you want, you can chat with people whose content you like in private
+      chat rooms.</p>
+
+      <p>- Did you know that our name is a combination of potato and post because
+      our team members love french fries so much?</p>
+      <p>- Do you know where the color of our logo and the designs of our program
+      derive their strength from? Potato Poweer</p>
     </p>
   </div>
 </div>
@@ -24,17 +40,29 @@
     <div class="wrapper">
       <div class="provides-item">
         <p class="texts">Socialize with your friends!</p>
-        <img src="{% static 'images/socialize.png' %}" alt="item-image" />
+        <img
+          src="{% static 'images/socialize.png' %}"
+          alt="item-image"
+          loading="lazy"
+        />
       </div>
 
       <div class="provides-item">
         <p class="texts">Keep up with the news around you!</p>
-        <img src="{% static 'images/news.png' %}" alt="item-image" />
+        <img
+          src="{% static 'images/news.png' %}"
+          alt="item-image"
+          loading="lazy"
+        />
       </div>
 
       <div class="provides-item">
         <p class="texts">Enjoy your time!</p>
-        <img src="{% static 'images/enjoy.png' %}" alt="item-image" />
+        <img
+          src="{% static 'images/enjoy.png' %}"
+          alt="item-image"
+          loading="lazy"
+        />
       </div>
     </div>
   </div>
@@ -44,10 +72,7 @@
   <div class="container">
     <h1 class="titles">About us</h1>
     <p class="texts">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid, quasi
-      sed illo ducimus laborum maiores. Fuga incidunt cumque beatae consectetur
-      obcaecati deserunt explicabo corporis commodi velit possimus, officiis
-      quia illum!
+      Hi, We are the Postado developer team. As university students chasing their dreams, we wanted to set sail for a new adventure. On the one hand, we are happy and proud to connect people, on the other hand, we enjoy adding new talents to ourselves. If you have any questions or problems about Postado, we are here 24/7 to assist you. We are waiting for your feedback about our platform, such as ideas, suggestions, complaints. If you care to join us -> postadoteam@gmail.com 
     </p>
   </div>
 </div>
@@ -55,23 +80,12 @@
 <div class="contact-section white-texts">
   <div class="container">
     <h1 class="titles">Contact us</h1>
-    <div class="form-container">
-      <h1 class="titles">Send us a message</h1>
-      <form method="post">
-        {% csrf_token %}
-        <input type="text" name="" id="" placeholder="Username" />
-        <input type="text" name="" id="" placeholder="Your email" />
-        <textarea cols="30" rows="10" placeholder="Your message"></textarea>
-        <div class="form-btn-container">
-          <button type="submit">Send</button>
-        </div>
-      </form>
-    </div>
     <div class="contact-infos">
       <img
         src="{% static 'images/postado-logo.png' %}"
         alt=""
         class="contact-image"
+        loading="lazy"
       />
       <p class="texts contact-mail">postadoteam@gmail.com</p>
     </div>

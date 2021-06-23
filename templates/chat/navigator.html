@@ -1,0 +1,31 @@
+{% extends 'base.html' %}{% load static %}{% block content %}
+<div class="container">
+  <div class="navigator-form titles">
+    <form method="POST">
+      {% csrf_token %} {{ form }}
+      <div class="form-btn-container">
+        <button type="submit">+</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="room-container">
+    <p class="back-btn texts" id="back-left-off">Back</p>
+    {% for r in rooms %}
+    <div class="room" data-url="{% url 'room' r.name %}">
+      {% for i in r.receiver.following_user_id.user_profile.all %}
+      <img src="{{ i.avatar.url }}" alt="pp" />
+      {% endfor %}
+      <p class="texts">{{ r.name }}</p>
+    </div>
+    {% endfor %} {% for r in received %}
+    <div class="room" data-url="{% url 'room' r.name %}">
+      {% for i in r.receiver.following_user_id.user_profile.all %}
+      <img src="{{ i.avatar.url }}" alt="pp" />
+      {% endfor %}
+      <p class="texts">{{ r.name }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

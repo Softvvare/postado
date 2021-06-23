@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="comment-section">
-    <a href="{% url 'feed' %}" class="comment-section-back texts">Back</a>
+    <p class="back-btn texts" id="back-left-off">Back</p>
     {% for comment in comments %}
     <div class="comment">
       {% if not comment.user.user_profile.all %}
@@ -10,9 +10,17 @@
         class="post-person-image"
         src="{% static 'images/icons/person.png' %}"
         alt="user_pp"
+        loading="lazy"
+        data-url="{% url 'profile' comment.user.username %}"
       />
       {% endif %} {% for i in comment.user.user_profile.all %}
-      <img class="post-person-image" src="{{ i.avatar.url }}" alt="user_pp" />
+      <img
+        class="post-person-image"
+        src="{{ i.avatar.url }}"
+        alt="user_pp"
+        loading="lazy"
+        data-url="{% url 'profile' comment.user.username %}"
+      />
       {% endfor %}
       <h2 class="titles">{{ comment.user.username }}</h2>
       <p class="texts">{{ comment.content }}</p>

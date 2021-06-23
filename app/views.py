@@ -22,9 +22,12 @@ def feed(request):
         user__followers__user_id=user)
     self_posts = Post.objects.filter(user=user)
     posts = (follow_posts | self_posts).distinct()
+    liked_posts = [i for i in Post.objects.all(
+    ) if Like.objects.filter(user=user, post=i)]
     context = {
         'user': user,
-        'posts': posts
+        'posts': posts,
+        'liked_posts': liked_posts
     }
     return render(request=request, template_name='feed.html', context=context)
 
@@ -239,10 +242,17 @@ def update_profile(request):
             messages.error(request, f'Something went wrong!')
             return redirect("update_profile")
     else:
-        p_form = UpdateProfileForm(instance=user)
+        p_form = UpdateProfileForm(instance=profile)
         u_form = UpdateUserForm(instance=user)
     context = {
         'p_form': p_form,
         'u_form': u_form
     }
     return render(request=request, template_name="update_profile.html", context=context)
+
+
+@login_required
+def detailed_post(request, id):
+    post = Post.objects.get(id=id)
+    context = {"post": post}
+    return render(request, "detailed_post.html", context)

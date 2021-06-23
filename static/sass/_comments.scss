@@ -10,22 +10,6 @@
   padding: 2em 0;
   margin-bottom: 10em;
 
-  .comment-section-back {
-    text-decoration: none;
-    margin: 0.2em 0;
-    padding: 1em 1em;
-    font-size: 1em;
-    color: $blue-color;
-
-    &:hover {
-      text-shadow: 0 0 1em rgba($blue-color, 0.5);
-    }
-
-    &::before {
-      content: "◀ ";
-    }
-  }
-
   .comment {
     width: 100%;
     margin: 0.2em 0;
@@ -54,6 +38,12 @@
       object-fit: cover;
       border-radius: 100%;
       grid-row: 1/3;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 1em rgba($dark, 0.3);
+      }
     }
   }
 }
@@ -73,8 +63,9 @@
       width: 100%;
       margin: 0;
       padding: 0 3em;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      display: flex;
+      flex-flow: row nowrap;
+      justify-self: center;
       align-items: center;
 
       label {
@@ -83,21 +74,44 @@
 
       textarea {
         height: 100px;
-        border-radius: 1em;
+        border-radius: 1em 0 0 1em;
         grid-column: 1/6;
         font-size: 1.5em;
+        margin-right: -3px;
+
+        &:hover {
+          border-right: none;
+        }
+
+        &:focus {
+          border-right: none;
+        }
       }
 
       .form-btn-container {
-        padding: 1em;
+        width: 30%;
+        margin: 0;
+        padding: 0;
 
         button {
+          border-radius: 0 1em 1em 0;
+          width: 100%;
+          height: 100px;
+          margin: 0;
+          padding: 0;
+
           &:hover {
-            padding: 0.5em 1em !important;
-            box-shadow: 0 0 1em rgba($success-color, 0.5);
+            box-shadow: none;
+            background-color: $blue-color;
           }
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .comment-form-container {
+    margin-bottom: 8em;
   }
 }
