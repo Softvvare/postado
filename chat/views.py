@@ -24,6 +24,7 @@ def navigator(request):
                 user.username, form.cleaned_data["receiver"].following_user_id.username)
 
             dup = form.cleaned_data["receiver"].following_user_id
+            print("\n\n",type(dup),"\n\n")
 
             if ChatRoom.objects.filter(receiver__in=dup).exists():
                 messages.error(request, f'You can not open second chat room!')
