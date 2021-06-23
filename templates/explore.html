@@ -37,7 +37,15 @@
           "
         >
           {% for tag in post.tags.all %}
-          <b style="margin: 0.2em">{{tag}}</b>
+          <b
+            style="
+              margin: 0.2em;
+              background: #3b82f6;
+              border-radius: 10px;
+              padding: 4px;
+            "
+            >{{tag}}</b
+          >
           {% endfor %}
         </small>
       </div>
@@ -45,10 +53,20 @@
       <div class="interactions">
         <p class="texts post-like interact-container">
           <a href="{% url 'like' post.id %}">
+            {% if not post in liked_posts %}
             <img
               src="{% static 'images/icons/like.png' %}"
-              alt="like-icon" /></a
-          ><a href=""><b class="like-count">{{ post.likes_count }}</b></a>
+              alt="like-icon"
+              loading="lazy"
+            />
+            {% else %}
+            <img
+              src="{% static 'images/icons/unlike.png' %}"
+              alt="like-icon"
+              loading="lazy"
+            />
+            {% endif %} </a
+          ><b class="like-count">{{ post.likes_count }}</b>
         </p>
         <p class="texts post-comment interact-container">
           <a href="{% url 'comments' post.id %}">
