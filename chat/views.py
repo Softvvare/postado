@@ -26,11 +26,9 @@ def navigator(request):
             if dup == user:
                 return redirect(navigator)
 
-            if ChatRoom.objects.filter(auth=user, receiver=dup) == user:
+            if ChatRoom.objects.filter(auth=user, receiver=dup).exists():
                 messages.error(request, f'You can not open second chat room!')
                 return redirect(navigator)
-
-
             data.save()
             return redirect(navigator)
         else:
