@@ -30,8 +30,8 @@ def navigator(request):
                 messages.error(request, f'You can not open second chat room!')
                 return redirect(navigator)
 
-            if dup == user:
-                return redirect(navigator)
+            # if dup == user:
+            #     return redirect(navigator)
 
             data.save()
             return redirect(navigator)
