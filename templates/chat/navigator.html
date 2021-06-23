@@ -28,4 +28,12 @@
     {% endfor %}
   </div>
 </div>
+
+<script>
+  document.querySelectorAll("option").forEach((elem) => {
+    if (elem.innerText == "{{ user.username }}") {
+      elem.style.display = "none";
+    }
+  });
+</script>
 {% endblock content %}
