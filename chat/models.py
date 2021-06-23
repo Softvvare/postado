@@ -7,7 +7,7 @@ from app.models import UserFollowing, BaseModel
 class ChatRoom(models.Model):
     name = models.CharField(max_length=255, unique=True, blank=False)
     auth = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="room_author", default=1)
+        User, on_delete=models.CASCADE, related_name="room_author")
     receiver = models.ForeignKey(
         UserFollowing, on_delete=models.CASCADE, related_name="roomto_user")
     seen = models.BooleanField(default=False)
