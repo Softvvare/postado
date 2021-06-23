@@ -1,6 +1,38 @@
 {% extends 'base.html' %}{% load static %}{% block content %}
-<textarea id="chat-log" cols="100" rows="20"></textarea><br />
-<input id="chat-message-input" type="text" size="100" /><br />
-<input id="chat-message-submit" type="button" value="Send" />
+<div class="container">
+  <div class="messages-container">
+    {% for i in msg %} {% if i.user == request.user %}
+    <div class="message" id="self-message">
+      <div class="message-ctx">
+        <h1 class="titles">{{ i.user.username }}</h1>
+        <p class="texts">{{ i.content }}</p>
+        <small class="texts">{{ i.created_date }}</small>
+      </div>
+      {% for u in i.user.user_profile.all %}
+      <img src="{{ u.avatar.url }}" alt="pp" />
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="message">
+      {% for u in i.user.user_profile.all %}
+      <img src="{{ u.avatar.url }}" alt="pp" />
+      {% endfor %}
+      <div class="message-ctx">
+        <h1 class="titles">{{ i.user.username }}</h1>
+        <p class="texts">{{ i.content }}</p>
+        <small class="texts">{{ i.created_date }}</small>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+</div>
+<div class="message-input">
+  <form action="" method="post">
+    {% csrf_token %} {{ form }}
+    <div class="form-btn-container">
+      <button type="submit">Send</button>
+    </div>
+  </form>
+</div>
 
 {% endblock content %}

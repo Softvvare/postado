@@ -210,10 +210,17 @@ def update_profile(request):
             messages.error(request, f'Something went wrong!')
             return redirect("update_profile")
     else:
-        p_form = UpdateProfileForm(instance=user)
+        p_form = UpdateProfileForm(instance=profile)
         u_form = UpdateUserForm(instance=user)
     context = {
         'p_form': p_form,
         'u_form': u_form
     }
     return render(request=request, template_name="update_profile.html", context=context)
+
+
+@login_required
+def detailed_post(request, id):
+    post = Post.objects.get(id=id)
+    context = {"post": post}
+    return render(request, "detailed_post.html", context)

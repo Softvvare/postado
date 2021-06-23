@@ -1,13 +1,12 @@
-{% extends "base.html" %}
-{% load static %}{% block content %}
+{% extends "base.html" %} {% load static %}{% block content %}
 <div id="dimmer"></div>
 <div class="container">
   <div class="feed">
-    {% for post in posts %}
     <div class="post">
       {% if post.user == user %}
       <button class="post-delete" onclick="deleteEnsure(this)">Delete</button>
       {% endif %}
+
       <div class="post-image-container">
         {% if post.photo %}
         <img class="post-image" src="{{ post.photo.url }}" alt="image" loading="lazy"/>
@@ -97,9 +96,7 @@
           <p class="texts"><b>{{ u.user.username }}</b> liked!</p>
         </div>
         {% endfor %}
-      </div>
     </div>
-    {% endfor %}
   </div>
 </div>
 

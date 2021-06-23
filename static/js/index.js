@@ -181,3 +181,22 @@ try {
       .classList.remove("popup-unactive");
   });
 } catch (err) {}
+
+// post detailed view:
+try {
+  document.querySelectorAll(".post-ctx").forEach((elem) => {
+    elem.addEventListener("click", (e) => {
+      window.location.href = elem.dataset.url;
+    });
+  });
+} catch (err) {}
+
+// go into room:
+try {
+  document.querySelectorAll(".room").forEach((elem) => {
+    elem.addEventListener("click", (e) => {
+      console.log(elem.dataset.url);
+      window.location.href = elem.dataset.url;
+    });
+  });
+} catch (err) {}

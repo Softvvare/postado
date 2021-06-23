@@ -49,7 +49,7 @@
     {% for i in u.user_id.user_profile.all %}
     <img src="{{ i.avatar.url }}" alt="f_avatar" id="ff-user" data-purl="{% url 'profile' i.user.username %}">
     {% endfor %}
-    <p class="texts">{{ u }}</p>
+    <p class="texts">{{ u.user_id.username }}</p>
   </div>
   {% endfor %}
 </div>
@@ -74,7 +74,7 @@
           src="{{ profile.avatar.url }}"
           alt="user_pp"
         />
-        <div class="post-ctx">
+        <div class="post-ctx" data-url="{% url 'detailed_post' post.id %}">
           <h1 class="texts post-username">{{ post.user.username }}</h1>
           <h2 class="texts post-title">{{ post.title }}</h2>
           <p class="texts post-content">{{ post.content }}</p>
@@ -95,7 +95,7 @@
                 alt="comment-icon" /></a
             ><b class="comment-count">{{ post.comments_count }}</b>
           </p>
-          <p class="texts post-share interact-container">
+          <p class="texts post-share interact-container" id="share" data-copy="{% url 'detailed_post' post.id %}">
             <img src="{% static 'images/icons/share.png' %}" alt="share-icon" />
           </p>
         </div>

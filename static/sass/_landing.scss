@@ -12,6 +12,7 @@
 .intro-section {
   p {
     margin: 3em 0;
+    text-align: justify;
   }
 }
 
@@ -72,6 +73,11 @@
       text-align: center;
       margin-bottom: 2em;
     }
+
+    p {
+      text-align: justify;
+      font-size: 1.2em;
+    }
   }
 }
 
@@ -80,32 +86,12 @@
   padding: 3em 0;
   box-shadow: 0 -1px 1em rgba($dark, 0.5);
 
-  .container {
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: repeat(5, 1fr);
-    align-items: center;
-
-    h1 {
-      text-align: center;
-      margin-bottom: 2em;
-      grid-row: 1;
-      grid-column: 1/6;
-    }
-
-    .form-container {
-      width: 100%;
-      margin: 0;
-      grid-column: 1/4;
-      background-color: transparent;
-      color: $light;
-      box-shadow: none;
-    }
+  h1 {
+    text-align: center;
   }
 
   .contact-infos {
     width: 100%;
-    grid-column: 4/6;
     text-align: center;
 
     img {
