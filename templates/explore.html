@@ -1,15 +1,13 @@
 {% extends "base.html" %} {% load static %}{% block content %}
 <div id="dimmer"></div>
 <div class="container">
-
-    <div class="form-container">
-        <form class="" role="form" method="POST" id>
-            {% csrf_token %}
-            <input type="text" id="selected_tag" name="selected_tag">
-            <input type="submit" value="search">
-        </form>
-
-    </div>
+  <div class="form-container">
+    <form class="" role="form" method="POST" id>
+      {% csrf_token %}
+      <input type="text" id="selected_tag" name="selected_tag" />
+      <input type="submit" value="search" />
+    </form>
+  </div>
 
   <div class="feed">
     {% for post in posts %}
@@ -22,16 +20,26 @@
         {% endif %}
       </div>
       {% for i in post.user.user_profile.all %}
-      <img
-        class="post-person-image"
-        src="{{ i.avatar.url }}"
-        alt="user_pp"
-      />
+      <img class="post-person-image" src="{{ i.avatar.url }}" alt="user_pp" />
       {% endfor %}
       <div class="post-ctx">
         <h1 class="texts post-username">{{ post.user.username }}</h1>
         <h2 class="texts post-title">{{ post.title }}</h2>
         <p class="texts post-content">{{ post.content }}</p>
+        <small
+          class="texts post-tag"
+          style="
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          {% for tag in post.tags.all %}
+          <b style="margin: 0.2em">{{tag}}</b>
+          {% endfor %}
+        </small>
       </div>
       <p class="texts post-date">{{ post.updated_date }}</p>
       <div class="interactions">
@@ -51,11 +59,6 @@
         </p>
         <p class="texts post-share interact-container">
           <img src="{% static 'images/icons/share.png' %}" alt="share-icon" />
-        </p>
-        <p class="texts post-tag interact-container">
-            {% for tag in post.tags.all %}
-                <b>{{tag}}</b><br>
-            {% endfor %}
         </p>
       </div>
     </div>
