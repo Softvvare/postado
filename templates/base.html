@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <link
@@ -37,7 +38,10 @@
             id="nav-img"
             loading="lazy"
         /></a>
-        <a href="{% url 'explore' %}" class="nav-item titles" data-help="EXPLORE"
+        <a
+          href="{% url 'explore' %}"
+          class="nav-item titles"
+          data-help="EXPLORE"
           ><img
             src="{% static 'images/icons/explore.png' %}"
             alt=""

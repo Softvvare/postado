@@ -342,6 +342,7 @@ body {
     left: 50%;
     transform: translate(-50%, 0%);
     width: 89.99%;
+    padding: 0.5em !important;
 
     .logo {
       display: none;
@@ -354,6 +355,8 @@ body {
       width: 100%;
 
       .nav-item {
+        margin: 0 !important;
+
         img {
           width: 80px;
           height: 80px;

@@ -299,6 +299,15 @@
         width: 100px;
         height: 100px;
       }
+
+      .interactions {
+        grid-column: 1/6;
+      }
+
+      .post-date {
+        grid-row: 5;
+        grid-column: 1/6;
+      }
     }
   }
 }
